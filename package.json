@@ -1,0 +1,29 @@
+{
+  "name": "codeclub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tsx watch src/index.ts",
+    "start": "npx tsx ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevClarkMiller/CodeClub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DevClarkMiller/CodeClub/issues"
+  },
+  "homepage": "https://github.com/DevClarkMiller/CodeClub#readme",
+  "dependencies": {
+    "discord.js": "^14.19.1",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
