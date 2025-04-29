@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import { config } from "./config";
-import { commandFactory, CommandHandler, RoleError} from "./commands";
+import CommandHandler from "./commands/CommandHandler";
+import { commandFactory, RoleError} from "./commands";
 
 function isClubBot(displayName: string): boolean{
   return displayName == "CodeClub";

@@ -1,8 +1,5 @@
 import { User, GuildMember, Snowflake, Collection, GuildMemberRoleManager, Role as DiscordRole } from "discord.js";
-
-export interface CommandHandler{
-    handle(): Promise<any>;
-}
+import CommandHandler from "./CommandHandler";
 
 enum Role{
     ADMIN = 1,
@@ -40,7 +37,8 @@ function roleCommands(role: Role){
 
     switch(role){
         case Role.ADMIN:
-            res += "## /role --user USER --role ROLE $ Assigns the given user the specified role\n";
+            res += "## /addRole --user USER --role ROLE $ Assigns the given user the specified role\n";
+            res += "## /removeRole --user USER --role ROLE $ Removes role from the given user\n";
             break;
         case Role.USER: 
             res += '## /help $ Returns a list of commands\n';
@@ -50,12 +48,12 @@ function roleCommands(role: Role){
     return res
 }
 
-function getRoleID(role: Role, roles: GuildMemberRoleManager): string {
-    let roleName: string = getRoleName(role);
-    const discRole: DiscordRole | undefined = roles.cache.find(discRole => discRole.name === roleName);
-    if (!discRole) return "";
-    return discRole.id;
-}
+// function getRoleID(role: Role, roles: GuildMemberRoleManager): string {
+//     let roleName: string = getRoleName(role);
+//     const discRole: DiscordRole | undefined = roles.cache.find(discRole => discRole.name === roleName);
+//     if (!discRole) return "";
+//     return discRole.id;
+// }
 
 abstract class SlashCommandHandler implements CommandHandler{
     protected account: User;
@@ -130,7 +128,7 @@ abstract class RoleCommandHandler extends SlashCommandHandler{
         const userAndRole = this.getUserAndRole();
         if (!userAndRole) return ROLE_ERR_DEFAULT;
  
-        const user = userAndRole?.role;
+        const user = userAndRole?.user;
         const role = userAndRole?.role;
 
         const member: GuildMember | null = await this.findMember(user);
@@ -145,7 +143,6 @@ abstract class RoleCommandHandler extends SlashCommandHandler{
         }
 
         return Promise.resolve(msg);
-        // return Promise.resolve(`${user} is now ${role}`);
     }
 }
 
@@ -174,7 +171,8 @@ class HelpCommandHandler extends SlashCommandHandler{
     handle(): Promise<any> {
         let res = '# Commands\n';
         let seenRoles: Set<Role> = new Set<Role>();
-        for (const roleStr in this.roles){
+        for (let i = 0; i < this.roles.length; i++){
+            let roleStr: string = this.roles[i];
             let role: Role = getRoleValue(roleStr);
             if (seenRoles.has(role)) continue;
             res += roleCommands(role);
