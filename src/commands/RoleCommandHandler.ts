@@ -46,7 +46,6 @@ export abstract class RoleCommandHandler extends SlashCommandHandler{
 
     protected async getRoleID(member: GuildMember, role: string): Promise<string | undefined>{
         const discRole: DiscordRole | undefined = member.guild.roles.cache.find((rol: DiscordRole) => rol.name === role);
-
         return discRole?.id;
     }
 

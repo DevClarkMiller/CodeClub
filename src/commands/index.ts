@@ -5,7 +5,8 @@ import Role, { RoleError, getRoleName, getRoleValue, roleCommands }  from "../li
 import CommandHandler from "./CommandHandler";
 import HelpCommandHandler from "./HelpCommandHandler";
 import { AddRoleCommandHandler, RemoveRoleCommandHandler } from "./RoleCommandHandler";
-import { CreateGymCommandHandler } from "./GymCommandHandler";
+import { CreateGymCommandHandler } from "./gym/GymCommandHandler";
+import { StatsGymCommandHandler } from './gym/StatsGymCommandHandler';
 
 // Does nothing probably means this command was for another bot
 class UnknownCommandHandler implements CommandHandler{
@@ -28,6 +29,7 @@ export function commandFactory(account: User, member: GuildMember | null, comman
         case "removeRole": return new RemoveRoleCommandHandler(account, member, args);
         case "help": return new HelpCommandHandler(account, member, args);
         case "createGym": return new CreateGymCommandHandler(account, member, args);
+        case "statsGym": return new StatsGymCommandHandler(account, member, args);
         default: return new UnknownCommandHandler();
     }
 }

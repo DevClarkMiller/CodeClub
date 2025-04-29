@@ -1,4 +1,4 @@
-import SlashCommandHandler from "./SlashCommandHandler";
+import SlashCommandHandler from "../SlashCommandHandler";
 
 // This will be tough, will have to use puppeteer and manually click through fields to get it, or use selenium.
 export class CreateGymCommandHandler extends SlashCommandHandler{
