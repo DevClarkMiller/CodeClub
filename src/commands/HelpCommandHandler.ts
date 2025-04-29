@@ -16,6 +16,6 @@ export default class HelpCommandHandler extends SlashCommandHandler{
             seenRoles.add(role);
         }
         
-        return Promise.resolve(seenRoles.size > 0 ? res : ""); // Return empty string if no roles were seen
+        return Promise.resolve(seenRoles.size > 0 ? res : "No commands found for given roles"); // Return empty string if no roles were seen
     }
 }
