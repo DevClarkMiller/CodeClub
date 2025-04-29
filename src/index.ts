@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import { config } from "./config";
 import CommandHandler from "./commands/CommandHandler";
-import { RoleError } from "./commands/Role";
+import { RoleError } from "./lib/Role";
 import { commandFactory} from "./commands";
 
 function isClubBot(displayName: string): boolean{
@@ -32,6 +32,8 @@ client.on('messageCreate', async msg =>{
   }catch(err: any){
     if (err instanceof RoleError)
       await msg.channel.send(err.message);
+    else
+      console.error(err.message);
   }
 });
 

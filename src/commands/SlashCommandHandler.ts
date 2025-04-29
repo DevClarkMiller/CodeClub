@@ -1,7 +1,7 @@
 import CommandHandler from "./CommandHandler";
 import { User, GuildMember } from "discord.js";
 
-import Role, { RoleError } from "./Role";
+import Role, { RoleError } from "../lib/Role";
 
 export default abstract class SlashCommandHandler implements CommandHandler{
     protected account: User;

@@ -1,21 +1,27 @@
 import { User, GuildMember, Snowflake, Collection, GuildMemberRoleManager, Role as DiscordRole } from "discord.js";
-import Role, { RoleError, getRoleName, getRoleValue, roleCommands }  from "./Role";
+import Role, { RoleError, getRoleName, getRoleValue, roleCommands }  from "../lib/Role";
 
 // Handlers
 import CommandHandler from "./CommandHandler";
-import SlashCommandHandler from "./SlashCommandHandler";
 import HelpCommandHandler from "./HelpCommandHandler";
 import { AddRoleCommandHandler, RemoveRoleCommandHandler } from "./RoleCommandHandler";
 import { CreateGymCommandHandler } from "./GymCommandHandler";
 
+// Does nothing probably means this command was for another bot
 class UnknownCommandHandler implements CommandHandler{
     handle(): Promise<any> {
-        console.log('Unknown command');
-        // throw new Error("UnknownCommand");
         return Promise.resolve();
     }
 }
 
+/**
+ * Brief: Returns a CommandHandlder based off the slash command said by a user
+ * @param account 
+ * @param member 
+ * @param commandName 
+ * @param args 
+ * @returns 
+ */
 export function commandFactory(account: User, member: GuildMember | null, commandName: string, args: any): CommandHandler{
     switch(commandName){
         case "addRole": return new AddRoleCommandHandler(account, member, args);

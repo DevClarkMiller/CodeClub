@@ -1,6 +1,6 @@
 import SlashCommandHandler from "./SlashCommandHandler";
 import { User, GuildMember, Snowflake, Collection, GuildMemberRoleManager, Role as DiscordRole } from "discord.js";
-import Role from "./Role";
+import Role from "../lib/Role";
 
 const ROLE_ERR_DEFAULT = "Couldn't give role to user, please see /help for the command layout";
 

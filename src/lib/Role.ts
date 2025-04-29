@@ -3,7 +3,8 @@ enum Role{
     USER = 2,
     // For testing
     TestRole = 3,
-    Organizer = 4
+    Organizer = 4,
+    UnknownRole = 10
 }
 
 export class RoleError extends Error{
@@ -17,7 +18,7 @@ export function getRoleValue(role: string): Role{
         case "Admin": return Role.ADMIN;
         case "User": return Role.USER;
         case "Organizer": return Role.Organizer;
-        default: return Role.USER;
+        default: return Role.UnknownRole;
     }
 }
 

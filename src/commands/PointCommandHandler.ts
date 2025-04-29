@@ -1,2 +1,2 @@
 import SlashCommandHandler from "./SlashCommandHandler";
-import Role from "./Role";
+import Role from "../lib/Role";
