@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx tsx watch src/index.ts",
-    "start": "npx tsx ./src/index.ts"
+    "start": "npx tsx ./src/index.ts",
+    "prisma:scaffold": "npx prisma db pull",
+    "prisma:init": "npx prisma init --datasource-provider sqlserver --output ../generated/prisma"
   },
   "repository": {
     "type": "git",
@@ -20,10 +22,13 @@
   },
   "homepage": "https://github.com/DevClarkMiller/CodeClub#readme",
   "dependencies": {
+    "@prisma/client": "^6.7.0",
     "discord.js": "^14.19.1",
     "dotenv": "^16.5.0"
   },
   "devDependencies": {
+    "@types/node": "^22.15.3",
+    "prisma": "^6.7.0",
     "typescript": "^5.8.3"
   }
 }

@@ -8,9 +8,7 @@ function isClubBot(displayName: string): boolean{
   return displayName == "CodeClub";
 }
 
-
 // DEFAULT ELO WILL BE 1000. TODO: DEVELOP ALGORITHM FOR PULLING CODEFORCES, KATTIS SCORE IN
-
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages, GatewayIntentBits.MessageContent],
