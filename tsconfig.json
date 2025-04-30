@@ -10,6 +10,11 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictNullChecks": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@lib/*": ["./src/lib/*"],
+      "@generated/*": ["./generated/*"],
+      "@commands/*": ["./src/commands/*"]
+    }
   }
 }

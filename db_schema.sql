@@ -22,16 +22,17 @@ CREATE TABLE Account(
 	DiscordUsername VARCHAR(255) NOT NULL,
 	CodeforcesUsername VARCHAR(255) NULL,
 	KattisUsername VARCHAR(255) NULL,
+	ShowPoints BIT DEFAULT 0 NOT NULL,
 
 	CONSTRAINT PK_Account PRIMARY KEY(ID),
 
 	-- Each username must be unique
 	CONSTRAINT AK_Account_DiscordUsername UNIQUE(DiscordUsername),
-	CONSTRAINT AK_Account_CodeforcesUsername UNIQUE(DiscordUsername),
-	CONSTRAINT AK_Account_KattisUsername UNIQUE(KattisUsername)
+	--CONSTRAINT AK_Account_CodeforcesUsername UNIQUE(CodeforcesUsername),
+	--CONSTRAINT AK_Account_KattisUsername UNIQUE(KattisUsername)
 );
 
-CREATE INDEX IX_Account_Username ON Account(Username);
+CREATE INDEX IX_Account_DiscordUsername ON Account(DiscordUsername);
 GO
 
 Create TABLE AccountPoints(
@@ -44,9 +45,9 @@ Create TABLE AccountPoints(
 );
 
 
--- Points can be calculated like this
-SELECT a.UserName as Username, SUM(ap.Total) AS Points
-FROM AccountPoints ap INNER JOIN Account a
-	ON ap.AccountID = a.ID
-GROUP BY a.Id, a.Username;
--- SELECT SUM(Total) FROM AccountPoints;
+---- Points can be calculated like this
+--SELECT a.UserName as Username, SUM(ap.Total) AS Points
+--FROM AccountPoints ap INNER JOIN Account a
+--	ON ap.AccountID = a.ID
+--GROUP BY a.Id, a.Username;
+---- SELECT SUM(Total) FROM AccountPoints;

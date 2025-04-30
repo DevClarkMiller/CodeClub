@@ -9,17 +9,20 @@ datasource db {
 }
 
 model Account {
-  ID            Int             @id(map: "PK_Account") @default(autoincrement())
-  Username      String?         @unique(map: "UK_Account") @db.VarChar(255)
-  AccountPoints AccountPoints[]
+  ID                 Int             @id(map: "PK_Account") @default(autoincrement())
+  DiscordUsername    String          @unique(map: "AK_Account_DiscordUsername") @db.VarChar(255)
+  CodeforcesUsername String?         @db.VarChar(255)
+  KattisUsername     String?         @db.VarChar(255)
+  ShowPoints         Boolean         @default(false, map: "DF__Account__ShowPoi__38996AB5")
+  AccountPoints      AccountPoints[]
 
-  @@index([Username], map: "IX_Account_Username")
+  @@index([DiscordUsername], map: "IX_Account_DiscordUsername")
 }
 
 model AccountPoints {
   ID        Int      @id(map: "PK_AccountPoints") @default(autoincrement())
-  Total     Float?   @default(0, map: "DF__AccountPo__Total__3A81B327") @db.Real
+  Total     Float?   @default(0, map: "DF__AccountPo__Total__3B75D760") @db.Real
   AccountID Int
-  CreatedOn DateTime @default(now(), map: "DF__AccountPo__Creat__3B75D760") @db.DateTime
+  CreatedOn DateTime @default(now(), map: "DF__AccountPo__Creat__3C69FB99") @db.DateTime
   Account   Account  @relation(fields: [AccountID], references: [ID], onUpdate: NoAction, map: "FK_AccountPoints_Account")
 }

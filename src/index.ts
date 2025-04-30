@@ -18,6 +18,11 @@ client.once("ready", () => {
   console.log("Discord bot is ready! 🤖");
 });
 
+client.on('guildMemberAdd', async member =>{
+  const commandHandler: CommandHandler = commandFactory(member.user, member, "addAccount", null);
+  return commandHandler.handle();
+});
+
 client.on('messageCreate', async msg =>{
   try{
     if (isClubBot(msg.author.displayName)) return;

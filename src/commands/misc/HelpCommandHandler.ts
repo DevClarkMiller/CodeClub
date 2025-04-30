@@ -1,5 +1,5 @@
-import SlashCommandHandler from "./SlashCommandHandler";
-import Role, { getRoleName, getRoleValue, roleCommands } from "../lib/Role";
+import SlashCommandHandler from "@commands/SlashCommandHandler";
+import Role, { getRoleName, getRoleValue, roleCommands } from "@lib/Role";
 
 // Builds the result of the help command
 export default class HelpCommandHandler extends SlashCommandHandler{

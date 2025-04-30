@@ -1,12 +1,14 @@
-import { User, GuildMember, Snowflake, Collection, GuildMemberRoleManager, Role as DiscordRole } from "discord.js";
-import Role, { RoleError, getRoleName, getRoleValue, roleCommands }  from "../lib/Role";
+import { User, GuildMember} from "discord.js";
 
 // Handlers
 import CommandHandler from "./CommandHandler";
-import HelpCommandHandler from "./HelpCommandHandler";
+import HelpCommandHandler from "@commands/misc/HelpCommandHandler";
 import { AddRoleCommandHandler, RemoveRoleCommandHandler } from "./RoleCommandHandler";
 import { CreateGymCommandHandler } from "./gym/CreateGymCommandHandler";
 import { StatsGymCommandHandler } from './gym/StatsGymCommandHandler';
+import AddAllAccountsCommandHandler from "./account/AddAllAccountsCommandHandler";
+import AddAccountCommandHandler from "./account/AddAccountCommandHandler";
+import ToggleShowELOCommandHandler from "./ToggleShowELOCommandHandler";
 
 // Does nothing probably means this command was for another bot
 class UnknownCommandHandler implements CommandHandler{
@@ -30,6 +32,9 @@ export function commandFactory(account: User, member: GuildMember | null, comman
         case "help": return new HelpCommandHandler(account, member, args);
         case "createGym": return new CreateGymCommandHandler(account, member, args);
         case "statsGym": return new StatsGymCommandHandler(account, member, args);
+        case "addAllAccounts": return new AddAllAccountsCommandHandler(account, member, args);
+        case "addAccount": return new AddAccountCommandHandler(account, member, args);
+        case "toggleShowELO": return new ToggleShowELOCommandHandler(account, member, args);
         default: return new UnknownCommandHandler();
     }
 }

@@ -44,6 +44,7 @@ export function roleCommands(role: Role){
             res.push("## /help $ Returns a list of commands");
             res.push("## /points --user USER $ Returns the amount of points the given user has");
             res.push("## /statsGym --GYM_URL $ Returns the stats on the given gym");
+            res.push("## /toggleShowELO $ Will toggle if your nickname has your ELO included");
             break;
         case Role.Organizer: 
             let currentDate: number = Date.now();
