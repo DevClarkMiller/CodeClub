@@ -12,7 +12,7 @@ export default class HelpCommandHandler extends SlashCommandHandler{
             let roleStr: string = roleList[i];
             let role: Role = getRoleValue(roleStr);
             if (role === Role.UnknownRole || seenRoles.has(role)) continue;
-            res += roleCommands(role);
+            res += roleCommands(role) + '\n';
             seenRoles.add(role);
         }
         

@@ -33,16 +33,17 @@ export function getRoleName(role: Role): string{
 }
 
 export function roleCommands(role: Role){
-    let res: string = ""; // Res is built onto from the role, this is done for clarity
+    let res: string[] = []; // Res is built onto from the role, this is done for clarity
 
     switch(role){
         case Role.ADMIN:
-            res += "## /addRole --user USER --role ROLE $ Assigns the given user the specified role\n";
-            res += "## /removeRole --user USER --role ROLE $ Removes role from the given user\n";
+            res.push("## /addRole --user USER --role ROLE $ Assigns the given user the specified role");
+            res.push("## /removeRole --user USER --role ROLE $ Removes role from the given user");
             break;
         case Role.USER: 
-            res += "## /help $ Returns a list of commands\n";
-            res += "## /points --user USER $ Returns the amount of points the given user has\n";
+            res.push("## /help $ Returns a list of commands");
+            res.push("## /points --user USER $ Returns the amount of points the given user has");
+            res.push("## /statsGym --GYM_URL $ Returns the stats on the given gym");
             break;
         case Role.Organizer: 
             let currentDate: number = Date.now();
@@ -50,11 +51,11 @@ export function roleCommands(role: Role){
             date.setDate(date.getDate() + 1); // Add a single day to the date
             let dateStr: string = date.toISOString().split('T')[0];
 
-            res += `## /createGym --name GYM_NAME --date ${dateStr} --time 16:00 --problems https://prob1url.com https://prob2url.com https://prob3url.com $ Creates a gym with the given name, for the given datetime with the given problemset\n`;
+            res.push(`## /createGym --name GYM_NAME --date ${dateStr} --time 16:00 --problems https://prob1url.com https://prob2url.com https://prob3url.com $ Creates a gym with the given name, for the given datetime with the given problemset`);
             break;
     }
 
-    return res
+    return res.join("\n");
 }
 
 export default Role;

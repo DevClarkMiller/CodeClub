@@ -19,10 +19,16 @@ USE CodeClub;
 GO
 CREATE TABLE Account(
 	ID INTEGER IDENTITY,
-	Username VARCHAR(255),
+	DiscordUsername VARCHAR(255) NOT NULL,
+	CodeforcesUsername VARCHAR(255) NULL,
+	KattisUsername VARCHAR(255) NULL,
 
 	CONSTRAINT PK_Account PRIMARY KEY(ID),
-	CONSTRAINT UK_Account UNIQUE(Username) -- Username must be unique
+
+	-- Each username must be unique
+	CONSTRAINT AK_Account_DiscordUsername UNIQUE(DiscordUsername),
+	CONSTRAINT AK_Account_CodeforcesUsername UNIQUE(DiscordUsername),
+	CONSTRAINT AK_Account_KattisUsername UNIQUE(KattisUsername)
 );
 
 CREATE INDEX IX_Account_Username ON Account(Username);

@@ -5,7 +5,7 @@ import Role, { RoleError, getRoleName, getRoleValue, roleCommands }  from "../li
 import CommandHandler from "./CommandHandler";
 import HelpCommandHandler from "./HelpCommandHandler";
 import { AddRoleCommandHandler, RemoveRoleCommandHandler } from "./RoleCommandHandler";
-import { CreateGymCommandHandler } from "./gym/GymCommandHandler";
+import { CreateGymCommandHandler } from "./gym/CreateGymCommandHandler";
 import { StatsGymCommandHandler } from './gym/StatsGymCommandHandler';
 
 // Does nothing probably means this command was for another bot
