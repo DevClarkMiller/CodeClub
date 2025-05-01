@@ -1,4 +1,4 @@
-import AccountDao from "@commands/dao/accountDao";
+import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler";
 
 // THIS WILL ALSO ADD AN INITIAL 1000 ELO

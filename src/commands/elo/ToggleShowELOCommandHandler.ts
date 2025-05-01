@@ -1,7 +1,7 @@
 import { Account } from "@generated/prisma";
-import PrismaSingleton from "../lib/prismaSingleton";
-import AccountDao from "./dao/accountDao";
-import SlashCommandHandler from "./SlashCommandHandler";
+import PrismaSingleton from "@lib/prismaSingleton";
+import AccountDao from "@dao/accountDao";
+import SlashCommandHandler from "@commands/SlashCommandHandler";
 
 export default class ToggleShowELOCommandHandler extends SlashCommandHandler{
     async handle(): Promise<any> {
@@ -14,7 +14,7 @@ export default class ToggleShowELOCommandHandler extends SlashCommandHandler{
                 account = await accDao.add({DiscordUsername: this.account.username});
             }
 
-            await accDao.update({ShowElo: !account.ShowElo}, {ID: account.ID});
+            await accDao.toggleShowElo(account, this.member);
 
             return "Successfully toggled ELO label for account";
         }catch(err: any){
