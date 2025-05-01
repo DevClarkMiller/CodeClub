@@ -8,7 +8,8 @@
     "start": "npx tsx ./src/index.ts",
     "prisma:scaffold": "npx prisma db pull",
     "prisma:init": "npx prisma init --datasource-provider sqlserver --output ../generated/prisma",
-    "prisma:generate": "npx prisma generate"
+    "prisma:generate": "npx prisma generate",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,17 @@
   },
   "homepage": "https://github.com/DevClarkMiller/CodeClub#readme",
   "dependencies": {
+    "@babel/preset-env": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
     "@prisma/client": "^6.7.0",
     "discord.js": "^14.19.1",
     "dotenv": "^16.5.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.15.3",
+    "babel-plugin-module-resolver": "^5.0.2",
+    "jest": "^29.7.0",
     "prisma": "^6.7.0",
     "typescript": "^5.8.3"
   }

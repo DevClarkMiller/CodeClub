@@ -7,7 +7,7 @@ import { Guild } from "discord.js";
 
 const SHOW_ELO_ERR_DEFAULT = "Couldn't find ELO for user, please see /help for the command layout";
 
-export default class ShowELOCommandHandler extends SlashCommandHandler{
+export default class TotalELOCommandHandler extends SlashCommandHandler{
     async handle(): Promise<any> {
         try{
             const accDao: AccountDao = new AccountDao();
@@ -34,7 +34,7 @@ export default class ShowELOCommandHandler extends SlashCommandHandler{
             }
 
             const accEloDao: AccountEloDao = new AccountEloDao();
-            const totalElo: number = await accEloDao.totalPointsForAccount(account);
+            const totalElo: number = await accEloDao.totalEloForAccount(account);
 
             return `Total ELO for ${this.account.displayName} *${totalElo}`;
         }catch(err: any){

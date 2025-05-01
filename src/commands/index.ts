@@ -9,7 +9,7 @@ import { StatsGymCommandHandler } from './gym/StatsGymCommandHandler';
 import AddAllAccountsCommandHandler from "./account/AddAllAccountsCommandHandler";
 import AddAccountCommandHandler from "./account/AddAccountCommandHandler";
 import ToggleShowELOCommandHandler from "./elo/ToggleShowELOCommandHandler";
-import ShowELOCommandHandler from "./elo/ShowEloCommandHandler";
+import TotalELOCommandHandler from "./elo/TotalELOCommandHandler";
 
 // Does nothing probably means this command was for another bot
 class UnknownCommandHandler implements CommandHandler{
@@ -36,7 +36,7 @@ export function commandFactory(account: User, member: GuildMember | null, comman
         case "addAllAccounts": return new AddAllAccountsCommandHandler(account, member, args);
         case "addAccount": return new AddAccountCommandHandler(account, member, args);
         case "toggleShowELO": return new ToggleShowELOCommandHandler(account, member, args);
-        case "elo": return new ShowELOCommandHandler(account, member, args);
+        case "elo": return new TotalELOCommandHandler(account, member, args);
         default: return new UnknownCommandHandler();
     }
 }

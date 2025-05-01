@@ -16,7 +16,8 @@
       "@generated/*": ["./generated/*"],
       "@commands/*": ["./src/commands/*"],
       "@dao/*": ["./src/dao/*"],
-      "@config": ["./src/config.ts"]
+      "@test/*": ["./src/test/*"],
+      "@config": ["./src/config.ts"],
     }
   }
 }

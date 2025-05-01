@@ -19,7 +19,7 @@ export default abstract class Dao<ModelType, ModelClient extends {
             if (id === null)
                 throw Error("Id not provided");
 
-            return await this.model.findFirstOrThrow({where: {Id: id}})
+            return await this.model.findFirstOrThrow({where: {ID: id}})
         }catch(err: any){
             return null;
         }
@@ -78,7 +78,7 @@ export default abstract class Dao<ModelType, ModelClient extends {
             if (id === null)
                 throw Error("Id not provided");
 
-            await this.model.delete({ where: { Id: id }});
+            await this.model.delete({ where: { ID: id }});
         }catch(err: any){
             console.error("FAILED TO DELETE WITH ID: " + id);
             throw err;

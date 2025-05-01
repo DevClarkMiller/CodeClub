@@ -10,13 +10,15 @@ export default class AccountEloDao extends Dao<
     super(PrismaSingleton.instance.accountElo);
   }
 
-  public async totalPointsForAccount(account: Account): Promise<number> {
+  public async totalEloForAccount(account: Account): Promise<number> {
     try {
       const res = await PrismaSingleton.instance.accountElo.aggregate({
         _sum: { Total: true },
         where: { AccountID: account.ID },
       });
-      return res._sum.Total ?? 0;
+
+      if (!res._sum.Total) return 1;
+      return Math.max(res._sum.Total, 1);
     } catch (err: any) {
       console.error(err.message);
       return 0;
