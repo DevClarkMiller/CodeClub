@@ -9,20 +9,20 @@ datasource db {
 }
 
 model Account {
-  ID                 Int             @id(map: "PK_Account") @default(autoincrement())
-  DiscordUsername    String          @unique(map: "AK_Account_DiscordUsername") @db.VarChar(255)
-  CodeforcesUsername String?         @db.VarChar(255)
-  KattisUsername     String?         @db.VarChar(255)
-  ShowPoints         Boolean         @default(false, map: "DF__Account__ShowPoi__38996AB5")
-  AccountPoints      AccountPoints[]
+  ID                 Int          @id(map: "PK_Account") @default(autoincrement())
+  DiscordUsername    String       @unique(map: "AK_Account_DiscordUsername") @db.VarChar(255)
+  CodeforcesUsername String?      @db.VarChar(255)
+  KattisUsername     String?      @db.VarChar(255)
+  ShowElo            Boolean      @default(false, map: "DF__Account__ShowElo__38996AB5")
+  AccountElo         AccountElo[]
 
   @@index([DiscordUsername], map: "IX_Account_DiscordUsername")
 }
 
-model AccountPoints {
-  ID        Int      @id(map: "PK_AccountPoints") @default(autoincrement())
-  Total     Float?   @default(0, map: "DF__AccountPo__Total__3B75D760") @db.Real
+model AccountElo {
+  ID        Int      @id(map: "PK_AccountElo") @default(autoincrement())
+  Total     Float?   @default(0, map: "DF__AccountEl__Total__3B75D760") @db.Real
   AccountID Int
-  CreatedOn DateTime @default(now(), map: "DF__AccountPo__Creat__3C69FB99") @db.DateTime
-  Account   Account  @relation(fields: [AccountID], references: [ID], onUpdate: NoAction, map: "FK_AccountPoints_Account")
+  CreatedOn DateTime @default(now(), map: "DF__AccountEl__Creat__3C69FB99") @db.DateTime
+  Account   Account  @relation(fields: [AccountID], references: [ID], onUpdate: NoAction, map: "FK_AccountElo_Account")
 }

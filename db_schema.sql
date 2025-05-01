@@ -22,7 +22,7 @@ CREATE TABLE Account(
 	DiscordUsername VARCHAR(255) NOT NULL,
 	CodeforcesUsername VARCHAR(255) NULL,
 	KattisUsername VARCHAR(255) NULL,
-	ShowPoints BIT DEFAULT 0 NOT NULL,
+	ShowElo BIT DEFAULT 0 NOT NULL,
 
 	CONSTRAINT PK_Account PRIMARY KEY(ID),
 
@@ -35,13 +35,13 @@ CREATE TABLE Account(
 CREATE INDEX IX_Account_DiscordUsername ON Account(DiscordUsername);
 GO
 
-Create TABLE AccountPoints(
+Create TABLE AccountElo(
 	ID INTEGER IDENTITY,
 	Total REAL DEFAULT 0, -- Can be a negative or a positive
 	AccountID INTEGER NOT NULL,
 	CreatedOn DATETIME NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT PK_AccountPoints PRIMARY KEY(ID),
-	CONSTRAINT FK_AccountPoints_Account FOREIGN KEY (AccountID) REFERENCES Account(ID)
+	CONSTRAINT PK_AccountElo PRIMARY KEY(ID),
+	CONSTRAINT FK_AccountElo_Account FOREIGN KEY (AccountID) REFERENCES Account(ID)
 );
 
 

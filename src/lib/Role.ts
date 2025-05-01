@@ -37,14 +37,14 @@ export function roleCommands(role: Role){
 
     switch(role){
         case Role.ADMIN:
-            res.push("## /addRole --user USER --role ROLE $ Assigns the given user the specified role");
-            res.push("## /removeRole --user USER --role ROLE $ Removes role from the given user");
+            res.push("- /addRole --user USER --role ROLE $ Assigns the given user the specified role");
+            res.push("- /removeRole --user USER --role ROLE $ Removes role from the given user");
             break;
         case Role.USER: 
-            res.push("## /help $ Returns a list of commands");
-            res.push("## /points --user USER $ Returns the amount of points the given user has");
-            res.push("## /statsGym --GYM_URL $ Returns the stats on the given gym");
-            res.push("## /toggleShowELO $ Will toggle if your nickname has your ELO included");
+            res.push("- /help $ Returns a list of commands");
+            res.push("- /points --user USER $ Returns the amount of points the given user has");
+            res.push("- /statsGym --GYM_URL $ Returns the stats on the given gym");
+            res.push("- /toggleShowELO $ Will toggle if your nickname has your ELO included");
             break;
         case Role.Organizer: 
             let currentDate: number = Date.now();
@@ -52,7 +52,7 @@ export function roleCommands(role: Role){
             date.setDate(date.getDate() + 1); // Add a single day to the date
             let dateStr: string = date.toISOString().split('T')[0];
 
-            res.push(`## /createGym --name GYM_NAME --date ${dateStr} --time 16:00 --problems https://prob1url.com https://prob2url.com https://prob3url.com $ Creates a gym with the given name, for the given datetime with the given problemset`);
+            res.push(`- /createGym --name GYM_NAME --date ${dateStr} --time 16:00 --problems https://prob1url.com https://prob2url.com https://prob3url.com $ Creates a gym with the given name, for the given datetime with the given problemset`);
             break;
     }
 

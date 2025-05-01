@@ -14,7 +14,8 @@
     "paths": {
       "@lib/*": ["./src/lib/*"],
       "@generated/*": ["./generated/*"],
-      "@commands/*": ["./src/commands/*"]
+      "@commands/*": ["./src/commands/*"],
+      "@dao/*": ["./src/dao/*"]
     }
   }
 }
