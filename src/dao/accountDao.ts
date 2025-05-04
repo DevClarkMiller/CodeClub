@@ -19,6 +19,15 @@ export default class AccountDao extends Dao<
         }
     }
 
+    public async getByCodeforcesUsername(username: string): Promise<Account | null>{
+        try{
+            return await PrismaSingleton.instance.account.findFirst({where: {CodeforcesUsername: username}});
+        }catch(err: any){
+            console.error(`Couldn't get by username: ${err.message}`);
+            return null;
+        }
+    }
+
     public async getByDisplayName(username: string, guild: Guild): Promise<Account | null>{
         if (!guild) return null;
         let foundMember: Collection<Snowflake, GuildMember> = await guild.members.search({
@@ -35,8 +44,7 @@ export default class AccountDao extends Dao<
     public async updateNickname(account: Account, member: GuildMember | null): Promise<void>{
         if (!member || member.user.username === config.OWNER_USERNAME) return; // Can't rename the owner   
         await member.setNickname(null); // Resets their nickname back to the original
-
-        if (!account.ShowElo) return;
+        if (!account.ShowElo) return; // Means the user doesn't want their elo displayed anymore
 
         const accEloDao: AccountEloDao = new AccountEloDao();
         const totalPoints: number = await accEloDao.totalEloForAccount(account);
