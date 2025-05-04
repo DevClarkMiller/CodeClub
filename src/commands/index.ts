@@ -11,6 +11,7 @@ import AddAccountCommandHandler from "./account/AddAccountCommandHandler";
 import ToggleShowELOCommandHandler from "./elo/ToggleShowELOCommandHandler";
 import TotalELOCommandHandler from "./elo/TotalELOCommandHandler";
 import UpdateELOTagsCommandHandler from "./elo/UpdateELOTagsCommandHandler";
+import SetSiteUsernameCommandHandler from "./account/SetSiteUsernameCommandHandler";
 
 // Does nothing probably means this command was for another bot
 class UnknownCommandHandler implements CommandHandler{
@@ -39,6 +40,7 @@ export function commandFactory(account: User, member: GuildMember | null, comman
         case "toggleShowELO": return new ToggleShowELOCommandHandler(account, member, args);
         case "elo": return new TotalELOCommandHandler(account, member, args);
         case "updateEloTags": return new UpdateELOTagsCommandHandler(account, member, args);
+        case "setSiteUsername": return new SetSiteUsernameCommandHandler(account, member, args);
         default: return new UnknownCommandHandler();
     }
 }

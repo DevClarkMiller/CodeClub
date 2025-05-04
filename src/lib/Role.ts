@@ -50,6 +50,7 @@ export function roleCommands(role: Role){
             res.push("- /statsGym --GYM_URL $ Returns the stats on the given gym");
             res.push("- /toggleShowELO $ Will toggle if your nickname has your ELO included");
             res.push("- /addAccount $ Will add your account to the database");
+            res.push("- /setSiteUsername --user SITES_USERNAME --site ['kattis', 'codeforces'] $ Sets your username for the specified site, important for updating elo after a competition");
             break;
         case Role.Organizer: 
             res.push("## Organizer");
