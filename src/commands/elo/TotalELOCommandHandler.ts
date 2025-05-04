@@ -1,9 +1,7 @@
 import { Account } from "@generated/prisma";
-import PrismaSingleton from "@lib/prismaSingleton";
 import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler";
 import AccountEloDao from "@dao/accountEloDao";
-import { Guild } from "discord.js";
 
 const SHOW_ELO_ERR_DEFAULT = "Couldn't find ELO for user, please see /help for the command layout";
 
@@ -22,14 +20,14 @@ export default class TotalELOCommandHandler extends SlashCommandHandler{
                 user = this.args[i];
                 if (i === this.args.length) return SHOW_ELO_ERR_DEFAULT;
 
-                account = await accDao.getByDisplayName(user, this.member?.guild as Guild);
+                account = await accDao.getByUsername(user);
                 if (!account) return SHOW_ELO_ERR_DEFAULT;
             }else{
                 account = await accDao.getByUsername(this.account.username);
             
                 // Add account to the database
                 if (!account) {
-                    account = await accDao.add({DiscordUsername: this.account.username});
+                    account = await accDao.add({DiscordUsername: this.account.username}, this.member);
                 }
             }
 

@@ -24,5 +24,5 @@ model AccountElo {
   Total     Float?   @default(0, map: "DF__AccountEl__Total__3B75D760") @db.Real
   AccountID Int
   CreatedOn DateTime @default(now(), map: "DF__AccountEl__Creat__3C69FB99") @db.DateTime
-  Account   Account  @relation(fields: [AccountID], references: [ID], onUpdate: NoAction, map: "FK_AccountElo_Account")
+  Account   Account  @relation(fields: [AccountID], references: [ID], onDelete: Cascade, onUpdate: NoAction, map: "FK_AccountElo_Account")
 }

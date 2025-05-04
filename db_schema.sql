@@ -23,13 +23,15 @@ CREATE TABLE Account(
 	CodeforcesUsername VARCHAR(255) NULL,
 	KattisUsername VARCHAR(255) NULL,
 	ShowElo BIT DEFAULT 0 NOT NULL,
+	Nickname VARCHAR(255) NOT NULL,
 
 	CONSTRAINT PK_Account PRIMARY KEY(ID),
 
 	-- Each username must be unique
 	CONSTRAINT AK_Account_DiscordUsername UNIQUE(DiscordUsername),
 	--CONSTRAINT AK_Account_CodeforcesUsername UNIQUE(CodeforcesUsername),
-	--CONSTRAINT AK_Account_KattisUsername UNIQUE(KattisUsername)
+	--CONSTRAINT AK_Account_KattisUsername UNIQUE(KattisUsername),
+	-- CONSTRAINT AK_Account_Nickname UNIQUE(Nickname) -- Nickname isn't null because it's just a way to display their names
 );
 
 CREATE INDEX IX_Account_DiscordUsername ON Account(DiscordUsername);

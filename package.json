@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "npx tsx watch src/index.ts",
     "start": "npx tsx ./src/index.ts",
-    "prisma:scaffold": "npx prisma db pull",
     "prisma:init": "npx prisma init --datasource-provider sqlserver --output ../generated/prisma",
+    "prisma:scaffold": "npx prisma db pull",
     "prisma:generate": "npx prisma generate",
     "test": "jest"
   },

@@ -23,7 +23,7 @@ export default class AddAllAccountsCommandHandler extends SlashCommandHandler{
                 if (existingAccount !== null) continue;
                 
 
-                await accDao.add({DiscordUsername: member.user.username});
+                await accDao.add({DiscordUsername: member.user.username}, this.member);
 
                 addedCnt++;
             }catch(err){

@@ -1,5 +1,4 @@
 import { Account } from "@generated/prisma";
-import PrismaSingleton from "@lib/prismaSingleton";
 import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler";
 
@@ -11,7 +10,7 @@ export default class ToggleShowELOCommandHandler extends SlashCommandHandler{
             
             // Add account to the database
             if (!account) {
-                account = await accDao.add({DiscordUsername: this.account.username});
+                account = await accDao.add({DiscordUsername: this.account.username}, this.member);
             }
 
             await accDao.toggleShowElo(account, this.member);
