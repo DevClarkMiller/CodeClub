@@ -2,7 +2,7 @@ import SlashCommandHandler from "./SlashCommandHandler";
 import { User, GuildMember, Snowflake, Collection, GuildMemberRoleManager, Role as DiscordRole } from "discord.js";
 import Role from "../lib/Role";
 
-const ROLE_ERR_DEFAULT = "Couldn't give role to user, please see /help for the command layout";
+const ERR_DEFAULT = "Couldn't give role to user, please see /help for the command layout";
 
 export abstract class RoleCommandHandler extends SlashCommandHandler{
     public constructor(account: User, member: GuildMember | null, args: any){
@@ -53,7 +53,7 @@ export abstract class RoleCommandHandler extends SlashCommandHandler{
         if (!this.member?.roles.cache.find(r => r.name === "Admin")) return Promise.resolve(`Couldn't give role to user, ${this.account.displayName} doesn't have the correct perms`);
 
         const userAndRole = this.getUserAndRole();
-        if (!userAndRole) return ROLE_ERR_DEFAULT;
+        if (!userAndRole) return ERR_DEFAULT;
  
         const user = userAndRole?.user;
         const role = userAndRole?.role;

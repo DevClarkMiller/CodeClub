@@ -32,8 +32,4 @@ describe("can parse standing to accounts", () =>{
         console.log(parsedStandings);
         expect(parsedStandings).toBeTruthy();
     }, 300000);
-
-    // test("can log standings", () =>{
-    //     console.log(standings);
-    // });
 });

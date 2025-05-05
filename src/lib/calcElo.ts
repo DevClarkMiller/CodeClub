@@ -35,7 +35,7 @@ function calculateEloDiff(eloA: number, eloB: number, K: number, outcome: number
  * @param accounts 2D array of Accounts for each group of accounts
  * @returns A map of players usernames to their new elo
  */
-export async function calculateLeaderboardElo(accounts: Account[][], K: number = 30): Promise<Map<string, number> | undefined>{
+export async function calculateLeaderboardElo(accounts: Account[][], K: number = 30): Promise<Map<number, number> | undefined>{
     // TODO: GET THE PREFIX AND SUFFIX OF EACH GROUP AS WELL TO CALCULATE TIES!!!
     if (accounts.length === 0) return;
 
@@ -59,20 +59,20 @@ export async function calculateLeaderboardElo(accounts: Account[][], K: number =
         suffixSum[i] = (suffixSum[i + 1] + eloSum) / 2;
     }
     
-    // FINALLY CALCULATE THE NEW ELO FOR EACH ACCOUNT NOT CONSIDERING TIES
-    let res: Map<string, number> = new Map<string, number>();
+    // FINALLY CALCULATE THE ELO DIFF FOR EACH ACCOUNT NOT CONSIDERING TIES
+    let res: Map<number, number> = new Map<number, number>();
     for (let i = 0; i < accounts.length; i++){
         for(const account of accounts[i]){
             const currElo: number = await accEloDao.totalEloForAccount(account);
-            let newElo = currElo;
+            let eloDiff = 0;
 
             if (i - 1 >= 0) // THIS IS THE LOSS
-                newElo -= calculateEloDiff(newElo, prefixSum[i - 1], K, 0);
+                eloDiff -= calculateEloDiff(currElo, prefixSum[i - 1], K, 0);
 
             if (i + 1 < suffixSum.length) // THIS IS THE GAIN
-                newElo += calculateEloDiff(newElo, prefixSum[i + 1], K, 1);
+                eloDiff += calculateEloDiff(currElo, prefixSum[i + 1], K, 1);
 
-            res.set(account.DiscordUsername, newElo);
+            res.set(account.ID, eloDiff);
         }
     }
 

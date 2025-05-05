@@ -4,7 +4,16 @@ import { Account } from "@generated/prisma";
 
 export enum ContestSite {
     Kattis = 0,
-    Codeforces = 1
+    Codeforces = 1,
+    Unknown = 10
+}
+
+export function toContestSite(contest: string){
+    switch(contest.toLowerCase()){
+        case "kattis": return ContestSite.Kattis;
+        case "codeforces": return ContestSite.Codeforces;
+        default: return ContestSite.Unknown;
+    }
 }
 
 async function getAccounts(accDao: AccountDao, members: Codeforces.Member[]): Promise<Account[]>{
@@ -25,6 +34,8 @@ async function getAccounts(accDao: AccountDao, members: Codeforces.Member[]): Pr
     }
 }
 
+
+// Potentially update to do a search for any codeforce usernames which exist in the given competition
 async function parseCodeforcesStandings(standings: Codeforces.Standings): Promise<Account[][] | null>{
     try{
         const accDao: AccountDao = new AccountDao();
@@ -50,8 +61,6 @@ async function parseCodeforcesStandings(standings: Codeforces.Standings): Promis
                 res.push({accounts: accounts, points: row.points});
         }
         
-        // PLACEHOLDER
-        // console.log(res);
         return res.map(item => item.accounts); // Finally return an array with only the accounts, not including the points
     }catch(err: any){
         console.error(err);

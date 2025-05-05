@@ -1,5 +1,4 @@
 const TEST_USERNAMES = [
-    "userAlpha",
     "testUser01",
     "demoAccount",
     "guest123",
@@ -8,7 +7,8 @@ const TEST_USERNAMES = [
     "janeDoe",
     "coolUser99",
     "mockUser",
-    "userTestBot"
+    "userTestBot",
+    "userAlpha",
 ];
 
 export default TEST_USERNAMES;

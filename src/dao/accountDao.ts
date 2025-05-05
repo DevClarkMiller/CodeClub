@@ -52,7 +52,7 @@ export default class AccountDao extends Dao<
         member.setNickname(`${member.displayName} *${totalPoints}`);
     }
     
-    public async toggleShowElo(account: Account, member: GuildMember | null, toggleState: number = -1): Promise<void>{
+    public async toggleShowElo(account: Account, member: GuildMember | null, toggleState: -1 | 0 | 1 = -1): Promise<void>{
         try{
             let showElo: boolean = account?.ShowElo;
             if (toggleState == -1)

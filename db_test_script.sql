@@ -13,4 +13,4 @@ GROUP BY a.ID, a.DiscordUsername, a.CodeforcesUsername, a.KattisUsername, a.Show
 --VALUES(200, 20), (-15, 15)
 
 --INSERT INTO AccountElo(Total, AccountID)
---VALUES(17, 13
+--VALUES(17, 13)

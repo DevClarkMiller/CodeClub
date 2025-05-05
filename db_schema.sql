@@ -23,16 +23,24 @@ CREATE TABLE Account(
 	CodeforcesUsername VARCHAR(255) NULL,
 	KattisUsername VARCHAR(255) NULL,
 	ShowElo BIT DEFAULT 0 NOT NULL,
-	Nickname VARCHAR(255) NOT NULL,
 
 	CONSTRAINT PK_Account PRIMARY KEY(ID),
 
-	-- Each username must be unique
+	-- Discord username is the only thing which will have a table level unique for account
 	CONSTRAINT AK_Account_DiscordUsername UNIQUE(DiscordUsername),
-	--CONSTRAINT AK_Account_CodeforcesUsername UNIQUE(CodeforcesUsername),
-	--CONSTRAINT AK_Account_KattisUsername UNIQUE(KattisUsername),
-	-- CONSTRAINT AK_Account_Nickname UNIQUE(Nickname) -- Nickname isn't null because it's just a way to display their names
 );
+
+GO
+
+-- Unique index for non-null CodeforcesUsername
+CREATE UNIQUE INDEX UX_Account_CodeforcesUsername
+ON Account(CodeforcesUsername)
+WHERE CodeforcesUsername IS NOT NULL;
+
+-- Unique index for non-null KattisUsername
+CREATE UNIQUE INDEX UX_Account_KattisUsername
+ON Account(KattisUsername)
+WHERE KattisUsername IS NOT NULL;
 
 CREATE INDEX IX_Account_DiscordUsername ON Account(DiscordUsername);
 GO
@@ -46,6 +54,15 @@ Create TABLE AccountElo(
 	CONSTRAINT FK_AccountElo_Account FOREIGN KEY (AccountID) REFERENCES Account(ID) ON DELETE CASCADE
 );
 
+CREATE INDEX IX_Account_DiscordUsername ON Account(DiscordUsername);
+GO
+
+CREATE TABLE Contest(
+	ID INTEGER IDENTITY,
+
+
+	CONSTRAINT PK_Contest PRIMARY KEY (ID)
+);
 
 ---- Points can be calculated like this
 --SELECT a.UserName as Username, SUM(ap.Total) AS Points

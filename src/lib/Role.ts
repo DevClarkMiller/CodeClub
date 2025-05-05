@@ -40,7 +40,6 @@ export function roleCommands(role: Role){
             res.push("## Admin");
             res.push("- /addRole --user USER --role ROLE $ Assigns the given user the specified role");
             res.push("- /removeRole --user USER --role ROLE $ Removes role from the given user");
-            res.push("- /updateEloTags $ Updates the elo tag in each users nickname");
             res.push("- /addAllAccounts $ Adds every account in the server to the database");
             break;
         case Role.USER: 
@@ -60,6 +59,8 @@ export function roleCommands(role: Role){
             let dateStr: string = date.toISOString().split('T')[0];
 
             res.push(`- /createGym --name GYM_NAME --date ${dateStr} --time 16:00 --problems https://prob1url.com https://prob2url.com https://prob3url.com $ Creates a gym with the given name, for the given datetime with the given problemset`);
+            res.push('- /syncContestElo --site SITE_NAME --code CONTEST_CODE');
+            res.push("- /updateEloTags $ Updates the elo tag in each users nickname");
             break;
     }
 
