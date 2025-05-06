@@ -2,7 +2,7 @@ import Dao from "./dao";
 import PrismaSingleton from "@lib/prismaSingleton";
 import { Account } from "@generated/prisma";
 import AccountEloDao from "./accountEloDao";
-import { User, GuildMember, Snowflake, Collection, GuildMemberRoleManager, Role as DiscordRole, Guild } from "discord.js";
+import { GuildMember, Guild } from "discord.js";
 import { config } from "@config";
 export default class AccountDao extends Dao<
   Account,

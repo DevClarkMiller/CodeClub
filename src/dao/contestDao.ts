@@ -1,6 +1,6 @@
 import Dao from "./dao";
 import PrismaSingleton from "@lib/prismaSingleton";
-import { Account, AccountElo, Contest, Prisma } from "@generated/prisma"; // or "@generated/prisma" if that's your path
+import { Contest } from "@generated/prisma"; 
 
 export default class ContestDao extends Dao<
   Contest,
