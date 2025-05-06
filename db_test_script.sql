@@ -14,3 +14,5 @@ GROUP BY a.ID, a.DiscordUsername, a.CodeforcesUsername, a.KattisUsername, a.Show
 
 --INSERT INTO AccountElo(Total, AccountID)
 --VALUES(17, 13)
+
+-- UPDATE Account SET CodeforcesUsername = 'HarryVu176' WHERE ID = 2 

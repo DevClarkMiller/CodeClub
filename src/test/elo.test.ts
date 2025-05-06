@@ -47,7 +47,7 @@ describe("can calculate elo", () =>{
         expect(async () =>{
             eloDiffs = await calculateLeaderboardElo(accounts);  
             if (!eloDiffs) return;
-            await updateElo(eloDiffs);
+            await updateElo("TEST_COMPETITION", "codeforces", eloDiffs);
         }).not.toThrow();
     });
 });

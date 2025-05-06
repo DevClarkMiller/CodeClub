@@ -31,8 +31,10 @@ model AccountElo {
 model Contest {
   ID                 Int                  @id(map: "PK_Contest") @default(autoincrement())
   Name               String?              @db.VarChar(255)
-  Site               String               @unique(map: "AK_Contest_Site") @db.VarChar(255)
+  Site               String               @db.VarChar(255)
   ContestParticipant ContestParticipant[]
+
+  @@unique([Name, Site], map: "AK_Contest_Name_Site")
 }
 
 model ContestParticipant {

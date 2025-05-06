@@ -50,7 +50,7 @@ export default class SyncContestEloCommandHandler extends SlashCommandHandler{
 
             // Now update the elo for each account
             if (!eloDiffs) return "Something went wrong with the calculations, please try again";
-            await updateElo(eloDiffs);
+            await updateElo(standings.contest.id.toString(), "codeforces", eloDiffs);
 
             const accDao: AccountDao = new AccountDao();
             if (this.member?.guild)

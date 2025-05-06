@@ -63,7 +63,7 @@ CREATE TABLE Contest(
 	Site VARCHAR(255) NOT NULL,
 
 	CONSTRAINT PK_Contest PRIMARY KEY (ID),
-	CONSTRAINT AK_Contest_Site UNIQUE(Site)
+	CONSTRAINT AK_Contest_Name_Site UNIQUE(Name, Site)
 );
 
 CREATE TABLE ContestParticipant(
