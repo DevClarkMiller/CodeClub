@@ -14,6 +14,7 @@ import UpdateELOTagsCommandHandler from "./elo/UpdateELOTagsCommandHandler";
 import SetSiteUsernameCommandHandler from "./account/SetSiteUsernameCommandHandler";
 import SyncContestEloCommandHandler from "./elo/SyncContestEloCommandHandler";
 import { SyncGymEloCommandHandler } from "./gym/SyncGymEloCommandHandler";
+import PreviouslySyncedCommandHandler from "./misc/PreviouslySyncedCommandHandler";
 
 // Does nothing probably means this command was for another bot
 class UnknownCommandHandler implements CommandHandler{
@@ -45,6 +46,7 @@ export function commandFactory(account: User, member: GuildMember | null, comman
         case "setSiteUsername": return new SetSiteUsernameCommandHandler(account, member, args);
         case "syncContestElo": return new SyncContestEloCommandHandler(account, member, args);
         case "syncGymElo": return new SyncGymEloCommandHandler(account, member, args);
+        case "previouslySynced": return new PreviouslySyncedCommandHandler(account, member, args);
         default: return new UnknownCommandHandler();
     }
 }

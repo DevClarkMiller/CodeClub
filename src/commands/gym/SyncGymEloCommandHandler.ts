@@ -40,7 +40,7 @@ export class SyncGymEloCommandHandler extends SlashCommandHandler{
             return `Successfully updated elos for ${eloDiffs.size} members`;
         }catch(err: any){
             console.error(err);
-            return "Something went wrong, please ensure the html file is valid";
+            return "Something went wrong, please ensure the html file is valid and that the competition hasn't been synced already";
         }
     }
 }

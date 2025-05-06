@@ -62,6 +62,7 @@ export function roleCommands(role: Role){
             res.push('- /syncContestElo --site SITE_NAME --code CONTEST_CODE $ Syncs the contest to the database and updates the elo for each participant');
             res.push('- /syncGymElo $ Requires you to upload the html of the gym standings as an attachment')
             res.push("- /updateEloTags $ Updates the elo tag in each users nickname");
+            res.push("- /previouslySynced $ Lists all the previously synced competitions");
             break;
     }
 
