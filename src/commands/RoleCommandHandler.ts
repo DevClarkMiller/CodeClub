@@ -32,12 +32,6 @@ export abstract class RoleCommandHandler extends SlashCommandHandler{
         if (!userID || !role) return null; 
         return { userID, role };
     }
-
-    protected async findMember(userID: string): Promise<GuildMember | null>{
-        if (!this.member) return null;
-        return await this.member.guild.members.fetch(userID);
-    }
-
     protected async getRoleID(member: GuildMember, role: string): Promise<string | undefined>{
         const discRole: DiscordRole | undefined = member.guild.roles.cache.find((rol: DiscordRole) => rol.name === role);
         return discRole?.id;
@@ -51,7 +45,7 @@ export abstract class RoleCommandHandler extends SlashCommandHandler{
 
         const { userID, role } = userAndRole;
 
-        const member: GuildMember | null = await this.findMember(userID);
+        const member: GuildMember | null = await this.member.guild.members.fetch(userID);
         if (!member) return Promise.resolve("Member not found");
         const roleID: string | undefined = await this.getRoleID(member, role);
         if (!roleID) return Promise.resolve("Cannot give role, role doesn't exist");

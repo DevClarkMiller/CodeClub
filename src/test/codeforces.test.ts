@@ -54,6 +54,7 @@ describe('can fetch gym standings', () => {
     test("can scrape gym html without exception", async () =>{
         await expect(async () =>{
             standings = await client.gymStandings(testHtml);
+            console.log(standings);
         }).not.toThrow();
     });
 
@@ -61,7 +62,7 @@ describe('can fetch gym standings', () => {
         
         await expect(async () =>{
             parsedStandings = await parseStandings(standings, ContestSite.Codeforces);
-            console.log(parsedStandings);
+            // console.log(parsedStandings);
         }).not.toThrow();
     });
 });

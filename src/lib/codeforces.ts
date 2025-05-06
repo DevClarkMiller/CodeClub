@@ -47,18 +47,18 @@ export namespace Codeforces{
 
     export type Contest = {
         id: number;
-        name: string;
-        type: string;
-        phase: string;
-        frozen: boolean;
-        durationSeconds: number;
-        startTimeSeconds: number;
-        relativeTimeSeconds: number;
+        name?: string;
+        type?: string;
+        phase?: string;
+        frozen?: boolean;
+        durationSeconds?: number;
+        startTimeSeconds?: number;
+        relativeTimeSeconds?: number;
     }
     
     export type Standings = {
         status?: string;
-        contest?: Contest;
+        contest: Contest;
         problems?: Problem[];
         rows: Row[];
     }
@@ -88,8 +88,13 @@ export namespace Codeforces{
 
         public async gymStandings(gymHtml: string): Promise<Standings>{
             const $: cheerio.CheerioAPI = cheerio.load(gymHtml);
-            let standings: Standings = {rows: []};
+            let standings: Standings = {rows: [], contest: {id: 0}};
 
+            // Find the id of the competition
+            const hrefTokens: string[] = $(".contest-name").find("a").attr("href")?.split('/') as string[];
+            standings.contest.id = parseInt(hrefTokens[hrefTokens.length - 1]);
+
+            // Find each of the members and their standings
             $(".standings tr").each((_, element) =>{ 
                 // console.log($(this).prop('outerHTML'));
                 const contestantCell = $(element).find(".contestant-cell");

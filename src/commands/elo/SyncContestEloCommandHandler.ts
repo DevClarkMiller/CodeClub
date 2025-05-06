@@ -55,7 +55,6 @@ export default class SyncContestEloCommandHandler extends SlashCommandHandler{
             const accDao: AccountDao = new AccountDao();
             if (this.member?.guild)
                 await accDao.updateGuildElo(this.member?.guild);
-            
 
             return `Successfully updated elos for ${eloDiffs.size} members`;
         }catch(err: any){

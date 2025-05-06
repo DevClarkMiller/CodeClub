@@ -1,4 +1,4 @@
-import { GuildMember, User } from "discord.js";
+import { GuildMember, User, Collection, Snowflake} from "discord.js";
 
 import SlashCommandHandler from "@commands/SlashCommandHandler";
 import Role from "@lib/Role";
@@ -12,11 +12,12 @@ export default class AddAllAccountsCommandHandler extends SlashCommandHandler{
 
     async handle(): Promise<any> {
         let addedCnt: number = 0;
-        if (!this.member?.guild.members.cache) return "Unknown issue while adding all accounts";
+        if (!this.member?.guild) return "Unknown issue while adding all accounts";
+
+        const allMembers: Collection<Snowflake, GuildMember> = await this.member.guild.members.fetch({withPresences: true});
 
         const accDao: AccountDao = new AccountDao();
-        console.log(this.member.guild.members.cache.values());
-        for (const member of this.member?.guild.members.cache.values()){
+        for (const member of allMembers.values()){
             try{
                 let existingAccount: Account | null = await accDao.getByUsername(member.user.id);
                 if (existingAccount !== null) continue;
