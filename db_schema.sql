@@ -72,8 +72,8 @@ CREATE TABLE ContestParticipant(
 	AccountID INTEGER NOT NULL,
 
 	CONSTRAINT PK_ContestParticipant PRIMARY KEY(ID),
-	CONSTRAINT FK_ContestParticipant_Contest FOREIGN KEY (ContestID) REFERENCES Contest(ID),
-	CONSTRAINT FK_ContestParticipant_Account FOREIGN KEY (AccountID) REFERENCES Account(ID) 
+	CONSTRAINT FK_ContestParticipant_Contest FOREIGN KEY (ContestID) REFERENCES Contest(ID) ON DELETE CASCADE,
+	CONSTRAINT FK_ContestParticipant_Account FOREIGN KEY (AccountID) REFERENCES Account(ID) ON DELETE CASCADE
 );
 
 ---- Points can be calculated like this

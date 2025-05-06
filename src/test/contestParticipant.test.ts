@@ -25,7 +25,12 @@ describe('can add contest participants', () => {
 
     test("can successfully add contest participants", async () =>{
         await expect(async () =>{
-            conParDao.addStandings(contest?.ID as number, accounts);
+            let accountIds: number[] = [];
+            accounts.forEach(accountGroup => {
+                accountIds = [...accountIds, ...accountGroup.map(account => account.ID)]
+            });
+
+            conParDao.addStandings(contest?.ID as number, accountIds);
         }).not.toThrow();
     });
 });

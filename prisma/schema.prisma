@@ -41,6 +41,6 @@ model ContestParticipant {
   ID        Int     @id(map: "PK_ContestParticipant") @default(autoincrement())
   ContestID Int
   AccountID Int
-  Account   Account @relation(fields: [AccountID], references: [ID], onUpdate: NoAction, map: "FK_ContestParticipant_Account")
-  Contest   Contest @relation(fields: [ContestID], references: [ID], onUpdate: NoAction, map: "FK_ContestParticipant_Contest")
+  Account   Account @relation(fields: [AccountID], references: [ID], onDelete: Cascade, onUpdate: NoAction, map: "FK_ContestParticipant_Account")
+  Contest   Contest @relation(fields: [ContestID], references: [ID], onDelete: Cascade, onUpdate: NoAction, map: "FK_ContestParticipant_Contest")
 }

@@ -11,12 +11,10 @@ export default class ContestParticipantDao extends Dao<
     super(PrismaSingleton.instance.contestParticipant);
   }
 
-  public async addStandings(contestID: number, standings: Account[][]): Promise<any>{
+  public async addStandings(contestID: number, standings: number[]): Promise<any>{
     try{
-      for(const accountGroup of standings){
-        for(const account of accountGroup){
-          await this.add({AccountID: account.ID, ContestID: contestID});
-        }
+      for(const accountID of standings){
+        await this.add({AccountID: accountID, ContestID: contestID});
       }
     }catch(err: any){
       console.error(err);
