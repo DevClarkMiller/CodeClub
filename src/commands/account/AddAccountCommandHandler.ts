@@ -7,7 +7,7 @@ export default class AddAccountCommandHandler extends SlashCommandHandler{
         try{
             // await PrismaSingleton.instance.account.create({data: { DiscordUsername: this.account.username }});
             const accDao: AccountDao = new AccountDao();
-            await accDao.add({DiscordUsername: this.account.username}, this.member);
+            await accDao.add({DiscordUsername: this.account.id}, this.member);
             return `Successfully added ${this.account.displayName} added user to database`;
         }catch(err: any){
             return `Something went wrong while adding ${this.account.displayName} to database`;

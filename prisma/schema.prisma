@@ -9,12 +9,13 @@ datasource db {
 }
 
 model Account {
-  ID                 Int          @id(map: "PK_Account") @default(autoincrement())
-  DiscordUsername    String       @unique(map: "AK_Account_DiscordUsername") @db.VarChar(255)
-  CodeforcesUsername String?      @db.VarChar(255)
-  KattisUsername     String?      @db.VarChar(255)
-  ShowElo            Boolean      @default(false, map: "DF__Account__ShowElo__38996AB5")
+  ID                 Int                  @id(map: "PK_Account") @default(autoincrement())
+  DiscordUsername    String               @unique(map: "AK_Account_DiscordUsername") @db.VarChar(255)
+  CodeforcesUsername String?              @db.VarChar(255)
+  KattisUsername     String?              @db.VarChar(255)
+  ShowElo            Boolean              @default(false, map: "DF__Account__ShowElo__38996AB5")
   AccountElo         AccountElo[]
+  ContestParticipant ContestParticipant[]
 
   @@index([DiscordUsername], map: "IX_Account_DiscordUsername")
 }
@@ -25,4 +26,19 @@ model AccountElo {
   AccountID Int
   CreatedOn DateTime @default(now(), map: "DF__AccountEl__Creat__3C69FB99") @db.DateTime
   Account   Account  @relation(fields: [AccountID], references: [ID], onDelete: Cascade, onUpdate: NoAction, map: "FK_AccountElo_Account")
+}
+
+model Contest {
+  ID                 Int                  @id(map: "PK_Contest") @default(autoincrement())
+  Name               String?              @db.VarChar(255)
+  Site               String               @unique(map: "AK_Contest_Site") @db.VarChar(255)
+  ContestParticipant ContestParticipant[]
+}
+
+model ContestParticipant {
+  ID        Int     @id(map: "PK_ContestParticipant") @default(autoincrement())
+  ContestID Int
+  AccountID Int
+  Account   Account @relation(fields: [AccountID], references: [ID], onUpdate: NoAction, map: "FK_ContestParticipant_Account")
+  Contest   Contest @relation(fields: [ContestID], references: [ID], onUpdate: NoAction, map: "FK_ContestParticipant_Contest")
 }

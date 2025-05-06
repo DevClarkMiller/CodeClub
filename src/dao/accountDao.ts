@@ -28,21 +28,8 @@ export default class AccountDao extends Dao<
         }
     }
 
-    public async getByDisplayName(username: string, guild: Guild): Promise<Account | null>{
-        if (!guild) return null;
-        let foundMember: Collection<Snowflake, GuildMember> = await guild.members.search({
-            query: username,
-            limit: 1
-        });
-
-        if (foundMember.size != 1) return null;
-        const foundGuildMember: GuildMember = foundMember.get(foundMember.firstKey() as string) as GuildMember;
-        const account: Account | null = await this.getByUsername(foundGuildMember.user.username);
-        return account;
-    }
-
     public async updateNickname(account: Account, member: GuildMember | null): Promise<void>{
-        if (!member || member.user.username === config.OWNER_USERNAME) return; // Can't rename the owner   
+        if (!member || member.user.id === config.OWNER_USERNAME) return; // Can't rename the owner   
         await member.setNickname(null); // Resets their nickname back to the original
         if (!account.ShowElo) return; // Means the user doesn't want their elo displayed anymore
 
@@ -75,7 +62,7 @@ export default class AccountDao extends Dao<
     public async updateGuildElo(guild: Guild): Promise<void>{
         try{
             for (const member of guild.members.cache.values()){
-                const account: Account | null = await this.getByUsername(member.user.username);
+                const account: Account | null = await this.getByUsername(member.user.id);
                 if (!account) continue;
                 await this.updateNickname(account, member);
             }

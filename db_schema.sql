@@ -27,7 +27,7 @@ CREATE TABLE Account(
 	CONSTRAINT PK_Account PRIMARY KEY(ID),
 
 	-- Discord username is the only thing which will have a table level unique for account
-	CONSTRAINT AK_Account_DiscordUsername UNIQUE(DiscordUsername),
+	CONSTRAINT AK_Account_DiscordUsername UNIQUE(DiscordUsername)
 );
 
 GO
@@ -42,8 +42,8 @@ CREATE UNIQUE INDEX UX_Account_KattisUsername
 ON Account(KattisUsername)
 WHERE KattisUsername IS NOT NULL;
 
-CREATE INDEX IX_Account_DiscordUsername ON Account(DiscordUsername);
-GO
+-- CREATE INDEX IX_Account_DiscordUsername ON Account(DiscordUsername);
+-- GO
 
 Create TABLE AccountElo(
 	ID INTEGER IDENTITY,
@@ -59,11 +59,21 @@ GO
 
 CREATE TABLE Contest(
 	ID INTEGER IDENTITY,
-	Name VARCHAR(255) NULL,
-	
+	Name VARCHAR(255) NULL, -- May also be an ID
+	Site VARCHAR(255) NOT NULL,
 
+	CONSTRAINT PK_Contest PRIMARY KEY (ID),
+	CONSTRAINT AK_Contest_Site UNIQUE(Site)
+);
 
-	CONSTRAINT PK_Contest PRIMARY KEY (ID)
+CREATE TABLE ContestParticipant(
+	ID INTEGER IDENTITY,
+	ContestID INTEGER NOT NULL,
+	AccountID INTEGER NOT NULL,
+
+	CONSTRAINT PK_ContestParticipant PRIMARY KEY(ID),
+	CONSTRAINT FK_ContestParticipant_Contest FOREIGN KEY (ContestID) REFERENCES Contest(ID),
+	CONSTRAINT FK_ContestParticipant_Account FOREIGN KEY (AccountID) REFERENCES Account(ID) 
 );
 
 ---- Points can be calculated like this

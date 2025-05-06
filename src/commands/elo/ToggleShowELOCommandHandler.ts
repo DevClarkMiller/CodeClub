@@ -10,7 +10,7 @@ export default class ToggleShowELOCommandHandler extends SlashCommandHandler{
             
             // Add account to the database
             if (!account) {
-                account = await accDao.add({DiscordUsername: this.account.username}, this.member);
+                account = await accDao.add({DiscordUsername: this.account.id}, this.member);
             }
 
             await accDao.toggleShowElo(account, this.member);

@@ -38,14 +38,14 @@ export function roleCommands(role: Role){
     switch(role){
         case Role.ADMIN:
             res.push("## Admin");
-            res.push("- /addRole --user USER --role ROLE $ Assigns the given user the specified role");
-            res.push("- /removeRole --user USER --role ROLE $ Removes role from the given user");
+            res.push("- /addRole --userID USERID --role ROLE $ Assigns the given user the specified role");
+            res.push("- /removeRole --userID USERID --role ROLE $ Removes role from the given user");
             res.push("- /addAllAccounts $ Adds every account in the server to the database");
             break;
         case Role.USER: 
             res.push("## User");
             res.push("- /help $ Returns a list of commands");
-            res.push("- /elo --user USER $ Returns the amount of elo the given user has");
+            res.push("- /elo --userID USERID $ Returns the amount of elo the given user has");
             res.push("- /statsGym --GYM_URL $ Returns the stats on the given gym");
             res.push("- /toggleShowELO $ Will toggle if your nickname has your ELO included");
             res.push("- /addAccount $ Will add your account to the database");

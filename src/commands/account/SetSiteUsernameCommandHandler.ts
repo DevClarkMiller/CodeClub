@@ -40,7 +40,7 @@ export default class SetSiteUsernameCommandHandler extends SlashCommandHandler{
             const userAndSite = this.getUserAndSite();
             if (!userAndSite) return ERR_DEFAULT;
             let { user, site } = userAndSite;
-            let account: Account | null = await accDao.getByUsername(this.account.username);
+            let account: Account | null = await accDao.getByUsername(this.account.id);
             if (!account) return "Please do /addAccount before proceeding.";
             site = site.toLowerCase();
             if (!(["kattis", "codeforces"].find(s => s === site))) return "Site unknown, options are 'kattis' or 'codeforces'";
