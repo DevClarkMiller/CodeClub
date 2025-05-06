@@ -1,18 +1,21 @@
 import { Account } from "@generated/prisma";
-import PrismaSingleton from "@lib/prismaSingleton";
 import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler";
-import AccountEloDao from "@dao/accountEloDao";
-import { Guild } from "discord.js";
+import { GuildMember, User } from "discord.js";
 import { Codeforces } from "@lib/codeforces";
 import parseStandings, { ContestSite, toContestSite } from "@lib/parseStandings";
 import { calculateLeaderboardElo } from "@lib/calcElo";
 import updateElo from "@lib/updateElo";
+import Role from "@lib/Role";
 
 const ERR_DEFAULT = "Couldn't sync contest elo, please see /help for the command layout";
 
 
 export default class SyncContestEloCommandHandler extends SlashCommandHandler{
+    public constructor(account: User, member: GuildMember | null, args: any){
+        super(account, member, args, Role.Organizer);
+    }
+
     private getSiteAndCode(): {site: string, code: number}{
         let site: string = "";
         let code: number = 0;

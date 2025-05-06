@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits, messageLink } from "discord.js";
 import { config } from "./config";
 import CommandHandler from "./commands/CommandHandler";
 import { RoleError } from "./lib/Role";
@@ -32,6 +32,12 @@ client.on('messageCreate', async msg =>{
       let args: string[] = msg.content.split(" ");
       let cmd: string = args.shift() as string;
       cmd = cmd.substring(1, cmd.length);
+
+      // If there are any attachments, add them as an arg
+      for (const [_, attatchment] of msg.attachments){
+        args.push(attatchment.url);
+      }
+
       const commandHandler: CommandHandler = commandFactory(msg.author, msg.member, cmd, args);
       const res: any | undefined | null = await commandHandler.handle();
       if (res) await msg.channel.send(res);

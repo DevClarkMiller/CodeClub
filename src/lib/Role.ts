@@ -59,7 +59,8 @@ export function roleCommands(role: Role){
             let dateStr: string = date.toISOString().split('T')[0];
 
             res.push(`- /createGym --name GYM_NAME --date ${dateStr} --time 16:00 --problems https://prob1url.com https://prob2url.com https://prob3url.com $ Creates a gym with the given name, for the given datetime with the given problemset`);
-            res.push('- /syncContestElo --site SITE_NAME --code CONTEST_CODE');
+            res.push('- /syncContestElo --site SITE_NAME --code CONTEST_CODE $ Syncs the contest to the database and updates the elo for each participant');
+            res.push('- /syncGymElo $ Requires you to upload the html of the gym standings as an attachment')
             res.push("- /updateEloTags $ Updates the elo tag in each users nickname");
             break;
     }

@@ -39,11 +39,11 @@ async function getAccounts(accDao: AccountDao, members: Codeforces.Member[]): Pr
 async function parseCodeforcesStandings(standings: Codeforces.Standings): Promise<Account[][] | null>{
     try{
         const accDao: AccountDao = new AccountDao();
-        let res: {accounts: Account[], points: number}[] = [];
+        let res: {accounts: Account[], penalty: number}[] = [];
 
         const firstAccounts: Account[] = await getAccounts(accDao, standings.rows[0].party.members);
         if (firstAccounts.length > 0){
-            res.push({accounts: firstAccounts, points: standings.rows[0].points});
+            res.push({accounts: firstAccounts, penalty: standings.rows[0].penalty});
         }
 
         for (let i = 1; i < standings.rows.length; i++){
@@ -51,14 +51,14 @@ async function parseCodeforcesStandings(standings: Codeforces.Standings): Promis
             const accounts: Account[] = await getAccounts(accDao, row.party.members);
             if (accounts.length === 0) continue;
             if (res.length === 0){
-                res.push({accounts: accounts, points: row.points });
+                res.push({accounts: accounts, penalty: row.penalty });
                 continue;
             }
         
-            if (res[res.length - 1].points === row.points)
+            if (res[res.length - 1].penalty === row.penalty)
                 res[res.length - 1].accounts = [...res[res.length - 1].accounts, ...accounts]; // Merge the two groups since they have the same amount of points
             else
-                res.push({accounts: accounts, points: row.points});
+                res.push({accounts: accounts, penalty: row.penalty});
         }
         
         return res.map(item => item.accounts); // Finally return an array with only the accounts, not including the points

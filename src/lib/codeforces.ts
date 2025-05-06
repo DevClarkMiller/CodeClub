@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as cheerio from "cheerio";
 
 const BASE_URL = 'https://codeforces.com/api';
 
@@ -8,13 +9,13 @@ export namespace Codeforces{
     }
 
     export type Party = {
-        contestId: number;
-        participantId: number;
+        contestId?: number;
+        participantId?: number;
         members: Member[];
-        participateType: string;
-        ghost: boolean;
-        room: number;
-        startTimeSeconds: number;
+        participateType?: string;
+        ghost?: boolean;
+        room?: number;
+        startTimeSeconds?: number;
     }
 
     export type ProblemResult = {
@@ -26,12 +27,12 @@ export namespace Codeforces{
 
     export type Row = {
         party: Party;
-        rank: number;
-        points: number;
+        rank?: number;
+        points?: number;
         penalty: number;
-        successfulHackCount: number;
-        unsuccessfulHackCount: number;
-        problemResults: ProblemResult[];
+        successfulHackCount?: number;
+        unsuccessfulHackCount?: number;
+        problemResults?: ProblemResult[];
     }
 
     export type Problem = {
@@ -56,9 +57,9 @@ export namespace Codeforces{
     }
     
     export type Standings = {
-        status: string;
-        contest: Contest;
-        problems: Problem[];
+        status?: string;
+        contest?: Contest;
+        problems?: Problem[];
         rows: Row[];
     }
 
@@ -77,6 +78,34 @@ export namespace Codeforces{
                 console.error(err);
                 return null;
             }
+        }
+
+        private getContestantUsername(element: cheerio.Cheerio<any>): string | null{
+            const aElem = element.find("a");
+            if (aElem.length === 0) return null;
+            return aElem.html()?.trim() as string;
+        }
+
+        public async gymStandings(gymHtml: string): Promise<Standings>{
+            const $: cheerio.CheerioAPI = cheerio.load(gymHtml);
+            let standings: Standings = {rows: []};
+
+            $(".standings tr").each((_, element) =>{ 
+                // console.log($(this).prop('outerHTML'));
+                const contestantCell = $(element).find(".contestant-cell");
+                if (contestantCell.length === 0) return;
+
+                const username: string | null = this.getContestantUsername(contestantCell);
+                if (!username) return;
+
+                const penalty: number = parseInt($(element).find("td:nth-child(4)").html()?.trim() as string);
+                if (!penalty) return;
+                
+                const row: Row = {penalty: penalty, party: {members: [{handle: username}]}};
+                standings.rows.push(row);
+            });
+            
+            return Promise.resolve(standings);
         }
     }
 }
