@@ -1,9 +1,5 @@
-import { Account } from "@generated/prisma";
-import PrismaSingleton from "@lib/prismaSingleton";
 import AccountDao from "@dao/accountDao";
-import SlashCommandHandler from "@commands/SlashCommandHandler";
-import AccountEloDao from "@dao/accountEloDao";
-import { Guild } from "discord.js";
+import SlashCommandHandler from "@commands/SlashCommandHandler"
 
 export default class UpdateELOTagsCommandHandler extends SlashCommandHandler{
     async handle(): Promise<any> {

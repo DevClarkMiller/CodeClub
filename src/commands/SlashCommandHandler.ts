@@ -23,5 +23,19 @@ export default abstract class SlashCommandHandler implements CommandHandler{
         }
     }
 
+    public parseArgs(): Map<string, string>{
+        let vals = new Map<string, string>();
+
+        let i = 0;
+        while (i < this.args.length){
+            if (this.args[i].substring(0, 2) == "--"){
+                vals.set(this.args[i].substring(2, this.args[i].length).toLowerCase(), this.args[++i]);
+            }
+            i++;
+        }
+
+        return vals;
+    }
+
     abstract handle(): Promise<any>;
 }

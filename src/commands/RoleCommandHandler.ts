@@ -11,27 +11,6 @@ export abstract class RoleCommandHandler extends SlashCommandHandler{
 
     abstract handle(): Promise<any>;
 
-    protected getUserIDAndRole(): {userID: string, role: string} | null{
-        if (this.args.length < 4) return null;
-
-        let userID: string = "";
-        let role: string = "";
-
-        let i = 0;
-        while (i < this.args.length){
-            if (this.args[i].toLowerCase() === "--userid"){
-                i++;
-                userID = this.args[i];
-            }else if(this.args[i].toLowerCase() === '--role'){
-                i++;
-                role = this.args[i];
-            }
-            i++;
-        }
-
-        if (!userID || !role) return null; 
-        return { userID, role };
-    }
     protected async getRoleID(member: GuildMember, role: string): Promise<string | undefined>{
         const discRole: DiscordRole | undefined = member.guild.roles.cache.find((rol: DiscordRole) => rol.name === role);
         return discRole?.id;
@@ -40,10 +19,11 @@ export abstract class RoleCommandHandler extends SlashCommandHandler{
     protected async alterRole(msg: string, callback: (_member: GuildMember, _roleID: string) => Promise<GuildMember>){
         if (!this.member?.roles.cache.find(r => r.name === "Admin")) return Promise.resolve(`Couldn't give role to user, ${this.account.displayName} doesn't have the correct perms`);
 
-        const userAndRole = this.getUserIDAndRole();
-        if (!userAndRole) return ERR_DEFAULT;
+        let parsedArgs = this.parseArgs();
+        const userID: string | undefined = parsedArgs.get("userid");
+        const role: string | undefined = parsedArgs.get("role");
 
-        const { userID, role } = userAndRole;
+        if (!userID || !role) return ERR_DEFAULT;
 
         const member: GuildMember | null = await this.member.guild.members.fetch(userID);
         if (!member) return Promise.resolve("Member not found");

@@ -16,29 +16,15 @@ export default class SyncContestEloCommandHandler extends SlashCommandHandler{
         super(account, member, args, Role.Organizer);
     }
 
-    private getSiteAndCode(): {site: string, code: number}{
-        let site: string = "";
-        let code: number = 0;
-
-        let i = 0;
-        while (i < this.args.length){
-            if (this.args[i].toLowerCase() === "--site"){
-                i++;
-                site = this.args[i];
-            }else if(this.args[i].toLowerCase() === '--code'){
-                i++;
-                code = parseInt(this.args[i]);
-            }
-            i++;
-        }
-
-        if (!site || !code) throw new Error("Missing some args");
-        return { site, code };
-    }
-
     public async handle(): Promise<any> {
         try{
-            const { site, code } = this.getSiteAndCode(); 
+            // const { site, code } = this.getSiteAndCode(); 
+            let parsedArgs = this.parseArgs();
+            const site: string | undefined = parsedArgs.get("site");
+            let code: string | undefined | number = parsedArgs.get("code");
+            if (!site || !code) throw new Error("Missing some args");
+            code = parseInt(code);
+
             const client: Codeforces.Client = new Codeforces.Client();
             let standings: Codeforces.Standings | null = await client.standings(code);
             if (!standings) return ERR_DEFAULT;

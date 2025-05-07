@@ -4,8 +4,6 @@ import { User, GuildMember} from "discord.js";
 import CommandHandler from "./CommandHandler";
 import HelpCommandHandler from "@commands/misc/HelpCommandHandler";
 import { AddRoleCommandHandler, RemoveRoleCommandHandler } from "./RoleCommandHandler";
-import { CreateGymCommandHandler } from "./gym/CreateGymCommandHandler";
-import { StatsGymCommandHandler } from './gym/StatsGymCommandHandler';
 import AddAllAccountsCommandHandler from "./account/AddAllAccountsCommandHandler";
 import AddAccountCommandHandler from "./account/AddAccountCommandHandler";
 import ToggleShowELOCommandHandler from "./elo/ToggleShowELOCommandHandler";
@@ -36,8 +34,6 @@ export function commandFactory(account: User, member: GuildMember | null, comman
         case "addRole": return new AddRoleCommandHandler(account, member, args);
         case "removeRole": return new RemoveRoleCommandHandler(account, member, args);
         case "help": return new HelpCommandHandler(account, member, args);
-        case "createGym": return new CreateGymCommandHandler(account, member, args);
-        case "statsGym": return new StatsGymCommandHandler(account, member, args);
         case "addAllAccounts": return new AddAllAccountsCommandHandler(account, member, args);
         case "addAccount": return new AddAccountCommandHandler(account, member, args);
         case "toggleShowELO": return new ToggleShowELOCommandHandler(account, member, args);
