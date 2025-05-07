@@ -13,6 +13,8 @@ import SetSiteUsernameCommandHandler from "./account/SetSiteUsernameCommandHandl
 import SyncContestEloCommandHandler from "./elo/SyncContestEloCommandHandler";
 import { SyncGymEloCommandHandler } from "./gym/SyncGymEloCommandHandler";
 import PreviouslySyncedCommandHandler from "./misc/PreviouslySyncedCommandHandler";
+import EloHistoryCommandHandler from "./elo/EloHistoryCommandHandler";
+import AllAccountsCommandHandler from "./account/AllAccountsCommandHandler";
 
 // Does nothing probably means this command was for another bot
 class UnknownCommandHandler implements CommandHandler{
@@ -36,8 +38,10 @@ export function commandFactory(account: User, member: GuildMember | null, comman
         case "help": return new HelpCommandHandler(account, member, args);
         case "addAllAccounts": return new AddAllAccountsCommandHandler(account, member, args);
         case "addAccount": return new AddAccountCommandHandler(account, member, args);
+        case "allAccounts": return new AllAccountsCommandHandler(account, member, args);
         case "toggleShowELO": return new ToggleShowELOCommandHandler(account, member, args);
         case "elo": return new TotalELOCommandHandler(account, member, args);
+        case "eloHistory": return new EloHistoryCommandHandler(account, member, args);
         case "updateEloTags": return new UpdateELOTagsCommandHandler(account, member, args);
         case "setSiteUsername": return new SetSiteUsernameCommandHandler(account, member, args);
         case "syncContestElo": return new SyncContestEloCommandHandler(account, member, args);

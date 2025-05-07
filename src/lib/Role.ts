@@ -41,6 +41,10 @@ export function roleCommands(role: Role){
             res.push("- /addRole --userID USERID --role ROLE $ Assigns the given user the specified role");
             res.push("- /removeRole --userID USERID --role ROLE $ Removes role from the given user");
             res.push("- /addAllAccounts $ Adds every account in the server to the database");
+            res.push("- /allAccounts $ Lists off every account with their elo that's in the database");
+            res.push("- /giveAllUserRole $ Gives everyone in the server the user role");
+            res.push("- /wipeDB $ Wipes all the data from the database");
+            res.push("- /resetAllElo $ Resets the elo of everyone on the server back to 1000");
             break;
         case Role.Organizer: 
             res.push("## Organizer");
@@ -53,6 +57,7 @@ export function roleCommands(role: Role){
             res.push("## User");
             res.push("- /help $ Returns a list of commands");
             res.push("- /elo --userID USERID $ Returns the amount of elo the given user has");
+            res.push("- /eloHistory $ Returns your complete elo history");
             res.push("- /toggleShowELO $ Will toggle if your nickname has your ELO included");
             res.push("- /addAccount $ Will add your account to the database");
             res.push("- /setSiteUsername --user SITES_USERNAME --site ['kattis', 'codeforces'] $ Sets your username for the specified site, important for updating elo after a competition");

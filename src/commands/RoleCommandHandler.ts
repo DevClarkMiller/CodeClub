@@ -5,8 +5,10 @@ import Role from "../lib/Role";
 const ERR_DEFAULT = "Couldn't give role to user, please see /help for the command layout";
 
 export abstract class RoleCommandHandler extends SlashCommandHandler{
-    public constructor(account: User, member: GuildMember | null, args: any){
-        super(account, member, args, Role.ADMIN);
+    public constructor(account: User, member: GuildMember | null, args: any, override: boolean = false){
+        // Means no permissions are required for this command
+        if (override) super(account, member, args);
+        else super(account, member, args, Role.ADMIN);
     }
 
     abstract handle(): Promise<any>;

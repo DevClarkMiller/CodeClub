@@ -10,36 +10,14 @@ const ERR_DEFAULT = "Couldn't update username for site, please see /help for the
 
 
 export default class SetSiteUsernameCommandHandler extends SlashCommandHandler{
-    public constructor(account: User, member: GuildMember | null, args: any){
-        super(account, member, args, Role.Organizer);
-    }
-
-    getUserAndSite(): {user: string, site: string} | null{
-        let site: string = "";
-        let user: string = "";
-
-        let i = 0;
-        while (i < this.args.length){
-            if (this.args[i].toLowerCase() === "--user"){
-                i++;
-                user = this.args[i];
-            }else if(this.args[i].toLowerCase() === '--site'){
-                i++;
-                site = this.args[i];
-            }
-            i++;
-        }
-
-        if (!user || !site) return null; 
-        return { user, site };
-    }
-
     async handle(): Promise<any> {
         try{
             const accDao: AccountDao = new AccountDao();
-            const userAndSite = this.getUserAndSite();
-            if (!userAndSite) return ERR_DEFAULT;
-            let { user, site } = userAndSite;
+            const parsedArgs = this.parseArgs();
+            const user: string | undefined = parsedArgs.get('user');
+            let site: string | undefined = parsedArgs.get('site');
+            if (!user || !site) return ERR_DEFAULT;
+
             let account: Account | null = await accDao.getByUsername(this.account.id);
             if (!account) return "Please do /addAccount before proceeding.";
             site = site.toLowerCase();
