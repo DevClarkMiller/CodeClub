@@ -13,7 +13,7 @@ const ERR_DEFAULT = "Couldn't sync contest elo, please see /help for the command
 
 export default class SyncContestEloCommandHandler extends SlashCommandHandler{
     public constructor(account: User, member: GuildMember | null, args: any){
-        super(account, member, args, Role.Organizer);
+        super(account, member, args, Role.ORGANIZER);
     }
 
     public async handle(): Promise<any> {

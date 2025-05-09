@@ -3,7 +3,7 @@ enum Role{
     USER = 2,
     // For testing
     TestRole = 3,
-    Organizer = 4,
+    ORGANIZER = 4,
     UnknownRole = 10
 }
 
@@ -17,7 +17,7 @@ export function getRoleValue(role: string): Role{
     switch(role){
         case "Admin": return Role.ADMIN;
         case "User": return Role.USER;
-        case "Organizer": return Role.Organizer;
+        case "Organizer": return Role.ORGANIZER;
         default: return Role.UnknownRole;
     }
 }
@@ -27,7 +27,7 @@ export function getRoleName(role: Role): string{
         case Role.USER: return "User";
         case Role.ADMIN: return "Admin";
         case Role.TestRole: return "TestRole";
-        case Role.Organizer: return "Organizer";
+        case Role.ORGANIZER: return "Organizer";
         default: return "";   
     }
 }
@@ -46,7 +46,7 @@ export function roleCommands(role: Role){
             res.push("- /wipeDB $ Wipes all the data from the database");
             res.push("- /resetAllElo $ Resets the elo of everyone on the server back to 1000");
             break;
-        case Role.Organizer: 
+        case Role.ORGANIZER: 
             res.push("## Organizer");
             res.push('- /syncContestElo --site SITE_NAME --code CONTEST_CODE $ Syncs the contest to the database and updates the elo for each participant');
             res.push('- /syncGymElo $ Requires you to upload the html of the gym standings as an attachment')

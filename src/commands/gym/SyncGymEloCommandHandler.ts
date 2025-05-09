@@ -11,7 +11,7 @@ import { calculateLeaderboardElo } from "@lib/calcElo";
 
 export class SyncGymEloCommandHandler extends SlashCommandHandler{
     public constructor(account: User, member: GuildMember | null, args: any){
-        super(account, member, args, Role.Organizer);
+        super(account, member, args, Role.ORGANIZER);
     }
 
     public async handle(): Promise<any> {

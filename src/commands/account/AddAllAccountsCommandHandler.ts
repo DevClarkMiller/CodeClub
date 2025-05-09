@@ -7,7 +7,7 @@ import { Account } from "@generated/prisma";
 
 export default class AddAllAccountsCommandHandler extends SlashCommandHandler{
     public constructor(account: User, member: GuildMember | null, args: any){
-        super(account, member, args, Role.Organizer);
+        super(account, member, args, Role.ORGANIZER);
     }
 
     async handle(): Promise<any> {
