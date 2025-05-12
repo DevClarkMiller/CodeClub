@@ -10,9 +10,10 @@
     "prisma:scaffold": "npx prisma db pull",
     "prisma:generate": "npx prisma generate",
     "test": "jest",
-    "build": "npm run prisma:scaffold && docker build -t code_club_image .",
-    "save-image": "docker save -o code_club_image.tar code_club_image",
-    "deploy": "scp ./code_club_image.tar miller@db.clarkmiller.ca:/home/miller"
+    "build": "npm run prisma:scaffold && docker build -t codeclubimage .",
+    "save-image": "docker save -o codeclubimage.tar codeclubimage",
+    "deploy": "scp ./codeclubimage.tar miller@10.0.0.212:/home/miller",
+    "full-deployment": "npm run build && npm run save-image && npm run deploy"
   },
   "repository": {
     "type": "git",

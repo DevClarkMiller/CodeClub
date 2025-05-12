@@ -1,10 +1,4 @@
-FROM node:22
-
-# Install basic dependencies (Debian uses apt-get)
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    bash \
-    && rm -rf /var/lib/apt/lists/*
+FROM node:22-alpine
 
 WORKDIR /home/node/app
 COPY package*.json ./
