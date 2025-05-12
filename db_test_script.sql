@@ -24,4 +24,4 @@ ON a.ID = cp.AccountID;
 --INSERT INTO AccountElo(Total, AccountID)
 --VALUES(17, 13)
 
--- UPDATE Account SET CodeforcesUsername = 'HarryVu176' WHERE ID = 2 
+--UPDATE Account SET CodeforcesUsername = 'HarryVu176', ShowElo = 1 WHERE DiscordUsername = '709795509661073539';

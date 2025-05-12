@@ -24,6 +24,7 @@ export default class WipeDBCommandHandler extends SlashCommandHandler{
             await conDao.deleteMany(null);
             await conParDao.deleteMany(null);
 
+            return "Successfully wiped all records from database";
         }catch(err: any){
             return "Something went wrong while wiping the database";
         }

@@ -85,9 +85,9 @@ export default abstract class Dao<ModelType, ModelClient extends {
         }
     }
 
-    public async deleteMany(where: any): Promise<any>{
+    public async deleteMany(where: any | null): Promise<any>{
         try{
-            await this.model.deleteMany({ where: where});
+            await this.model.deleteMany({ where: where != null ? where : {}});
         }catch(err: any){
             throw err;
         }

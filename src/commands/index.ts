@@ -16,6 +16,7 @@ import PreviouslySyncedCommandHandler from "./misc/PreviouslySyncedCommandHandle
 import EloHistoryCommandHandler from "./elo/EloHistoryCommandHandler";
 import AllAccountsCommandHandler from "./account/AllAccountsCommandHandler";
 import WipeDBCommandHandler from "./misc/WipeDBCommandHandler";
+import ResetAllEloCommandHandler from "./elo/ResetAllEloCommandHandler";
 
 // Does nothing probably means this command was for another bot
 class UnknownCommandHandler implements CommandHandler{
@@ -49,6 +50,7 @@ export function commandFactory(account: User, member: GuildMember | null, comman
         case "syncGymElo": return new SyncGymEloCommandHandler(account, member, args);
         case "previouslySynced": return new PreviouslySyncedCommandHandler(account, member, args);
         case "wipeDB": return new WipeDBCommandHandler(account, member, args);
+        case "resetAllElo": return new ResetAllEloCommandHandler(account, member, args);
         default: return new UnknownCommandHandler();
     }
 }

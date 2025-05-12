@@ -42,7 +42,6 @@ export function roleCommands(role: Role){
             res.push("- /removeRole --userID USERID --role ROLE $ Removes role from the given user");
             res.push("- /addAllAccounts $ Adds every account in the server to the database");
             res.push("- /allAccounts $ Lists off every account with their elo that's in the database");
-            res.push("- /giveAllUserRole $ Gives everyone in the server the user role");
             res.push("- /wipeDB $ Wipes all the data from the database");
             res.push("- /resetAllElo $ Resets the elo of everyone on the server back to 1000");
             break;
