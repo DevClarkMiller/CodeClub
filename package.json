@@ -9,7 +9,10 @@
     "prisma:init": "npx prisma init --datasource-provider sqlserver --output ../generated/prisma",
     "prisma:scaffold": "npx prisma db pull",
     "prisma:generate": "npx prisma generate",
-    "test": "jest"
+    "test": "jest",
+    "build": "npm run prisma:scaffold && docker build -t code_club_image .",
+    "save-image": "docker save -o code_club_image.tar code_club_image",
+    "deploy": "scp ./code_club_image.tar miller@db.clarkmiller.ca:/home/miller"
   },
   "repository": {
     "type": "git",

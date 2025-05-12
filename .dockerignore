@@ -1,0 +1,7 @@
+# Dirs
+node_modules
+
+# Files
+Dockerfile
+.git
+.dockerignore
