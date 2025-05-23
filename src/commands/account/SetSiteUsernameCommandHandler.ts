@@ -40,4 +40,12 @@ export default class SetSiteUsernameCommandHandler extends SlashCommandHandler{
             return ERR_DEFAULT;
         }
     }
+
+    public getDescription(): string{
+        return "Sets your username for the specified site, important for updating elo after a competition";
+    }
+
+    public getName(): string{
+       return "setsiteusername"; 
+    }
 }

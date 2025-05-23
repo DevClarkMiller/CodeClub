@@ -1,5 +1,5 @@
 import SlashCommandHandler from "../SlashCommandHandler";
-import { User, GuildMember } from "discord.js";
+import { User, GuildMember, SlashCommandBuilder } from "discord.js";
 import Role from "@lib/Role";
 import { Codeforces } from "@lib/codeforces";
 import axios from "axios";
@@ -43,4 +43,24 @@ export class SyncGymEloCommandHandler extends SlashCommandHandler{
             return "Something went wrong, please ensure the html file is valid and that the competition hasn't been synced already";
         }
     }
+
+    public getDescription(): string{
+        return "Requires you to upload the html of the gym standings as an attachment";
+    }
+
+    public getName(): string{
+       return "syncgymelo"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("syncgymelo")
+    .setDescription("Requires you to upload the html of the gym standings as an attachment")
+    .addAttachmentOption(option =>
+        option
+        .setName('gym_standings_html')
+        .setDescription('The html with the standings from the gym')
+        .setRequired(true) // Make the attachment mandatory
+    )
+];

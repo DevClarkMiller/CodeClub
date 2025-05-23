@@ -1,5 +1,6 @@
 import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler"
+import { SlashCommandBuilder } from "discord.js";
 
 export default class UpdateELOTagsCommandHandler extends SlashCommandHandler{
     async handle(): Promise<any> {
@@ -13,4 +14,18 @@ export default class UpdateELOTagsCommandHandler extends SlashCommandHandler{
             return "";
         }
     }
+
+    public getDescription(): string{
+        return "Updates the elo tag in each users nickname";
+    }
+
+    public getName(): string{
+       return "updateelotags"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("updateelotags")
+    .setDescription("Updates the elo tag in each users nickname")
+];

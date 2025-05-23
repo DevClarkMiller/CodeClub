@@ -1,7 +1,7 @@
 import { Account } from "@generated/prisma";
 import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler";
-import { GuildMember, User } from "discord.js";
+import { GuildMember, SlashCommandBuilder, User } from "discord.js";
 import { Codeforces } from "@lib/codeforces";
 import parseStandings, { ContestSite, toContestSite } from "@lib/parseStandings";
 import { calculateLeaderboardElo } from "@lib/calcElo";
@@ -48,4 +48,28 @@ export default class SyncContestEloCommandHandler extends SlashCommandHandler{
             return ERR_DEFAULT;
         }
     }
+
+    public getDescription(): string{
+        return "Syncs the contest to the database and updates the elo for each participant";
+    }
+
+    public getName(): string{
+       return "synccontestelo"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("synccontestelo")
+    .setDescription("Syncs the contest to the database and updates the elo for each participant")
+    .addStringOption(option =>
+        option.setName("sitename")
+        .setDescription("The same of the site to sync the elo of")
+        .setRequired(true)
+    )
+    .addStringOption(option =>
+        option.setName("code")
+        .setDescription("The id or code of the contest")
+        .setRequired(true)
+    )
+];

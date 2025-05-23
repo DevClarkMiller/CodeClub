@@ -13,4 +13,12 @@ export default class AddAccountCommandHandler extends SlashCommandHandler{
             return `Something went wrong while adding ${this.account.displayName} to database`;
         }
     }
+
+    public getDescription(): string{
+        return "Will add your account to the database";
+    }
+
+    public getName(): string{
+       return "addaccount"; 
+    }
 }

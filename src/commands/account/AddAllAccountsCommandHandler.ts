@@ -35,4 +35,12 @@ export default class AddAllAccountsCommandHandler extends SlashCommandHandler{
             return Promise.resolve("All users are already in the database");
         return Promise.resolve(`Successfully added ${addedCnt} accounts to the database.`);
     }
+
+    public getDescription(): string{
+        return "Adds every account in the server to the database";
+    }
+
+    public getName(): string{
+       return "addallaccounts"; 
+    }
 }

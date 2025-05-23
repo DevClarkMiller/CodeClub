@@ -1,5 +1,5 @@
 import CommandHandler from "./CommandHandler";
-import { User, GuildMember } from "discord.js";
+import { User, GuildMember, SlashCommandBuilder } from "discord.js";
 
 import Role, { RoleError } from "../lib/Role";
 
@@ -37,5 +37,13 @@ export default abstract class SlashCommandHandler implements CommandHandler{
         return vals;
     }
 
-    abstract handle(): Promise<any>;
+    public abstract handle(): Promise<any>;
+    public abstract getDescription(): string;
+    public abstract getName(): string;
+
+    public static createSlashFunction(name: string, description: string): SlashCommandBuilder{
+        let commandBuilder: SlashCommandBuilder = new SlashCommandBuilder().setName(name).setDescription(description);
+
+        return commandBuilder;
+    }
 }

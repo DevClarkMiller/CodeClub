@@ -2,7 +2,7 @@ import { Account } from "@generated/prisma";
 import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler";
 import AccountEloDao from "@dao/accountEloDao";
-import { Guild, GuildMember } from "discord.js";
+import { Guild, GuildMember, SlashCommandBuilder } from "discord.js";
 import findMember from "@lib/findMember";
 
 const SHOW_ELO_ERR_DEFAULT = "Couldn't find ELO for user, please see /help for the command layout";
@@ -17,7 +17,7 @@ export default class TotalELOCommandHandler extends SlashCommandHandler{
             if (this.args.length !== 0){
                 let userID: string = "";
 
-                let i: number = this.args.findIndex(arg => arg === "--userID");
+                let i: number = this.args.findIndex(arg => arg === "--userid");
                 if (i == -1) return SHOW_ELO_ERR_DEFAULT;
                 i++; // Now points to the actual username
                 userID = this.args[i];
@@ -48,4 +48,23 @@ export default class TotalELOCommandHandler extends SlashCommandHandler{
             return "";
         }
     }
+
+    public getDescription(): string{
+        return "Returns the amount of elo the given user has";
+    }
+
+    public getName(): string{
+       return "elo"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("elo")
+    .setDescription("Returns the amount of elo the given user has")
+    .addStringOption(option => 
+        option.setName("userid")
+        .setDescription("The userid to check elo on").
+        setRequired(false)
+    )
+];

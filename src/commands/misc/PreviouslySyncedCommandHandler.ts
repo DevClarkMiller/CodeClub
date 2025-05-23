@@ -2,6 +2,7 @@ import SlashCommandHandler from "@commands/SlashCommandHandler";
 import Role, { getRoleName, getRoleValue, roleCommands } from "@lib/Role";
 import ContestDao from "@dao/contestDao";
 import { Contest } from "@generated/prisma";
+import { SlashCommandBuilder } from "discord.js";
 
 // Builds the result of the help command
 export default class PreviouslySyncedCommandHandler extends SlashCommandHandler{
@@ -22,4 +23,18 @@ export default class PreviouslySyncedCommandHandler extends SlashCommandHandler{
             return "Something went wrong while finding previous contests"
         }
     }
+
+    public getDescription(): string{
+        return "Lists all the previously synced competitions";
+    }
+
+    public getName(): string{
+       return "previouslysynced"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("previouslysynced")
+    .setDescription("Lists all the previously synced competitions")
+];

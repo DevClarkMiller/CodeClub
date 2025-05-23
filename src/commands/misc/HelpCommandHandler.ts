@@ -1,5 +1,6 @@
 import SlashCommandHandler from "@commands/SlashCommandHandler";
-import Role, { getRoleName, getRoleValue, roleCommands } from "@lib/Role";
+import Role, { getRoleValue, roleCommands } from "@lib/Role";
+import { SlashCommandBuilder } from "discord.js";
 
 // Builds the result of the help command
 export default class HelpCommandHandler extends SlashCommandHandler{
@@ -21,4 +22,23 @@ export default class HelpCommandHandler extends SlashCommandHandler{
         
         return Promise.resolve(seenRoles.size > 0 ? res.join("\n") : "No commands found for given roles"); // Return empty string if no roles were seen
     }
+
+    public getDescription(): string{
+        return "Returns a list of commands";
+    }
+
+    public getName(): string{
+       return "help"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("help")
+    .setDescription("Returns a list of commands")
+    .addStringOption(option => 
+        option.setName("role")
+        .setDescription("The role to get help on")
+        .setRequired(false)
+    )
+];

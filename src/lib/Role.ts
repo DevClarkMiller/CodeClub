@@ -38,28 +38,28 @@ export function roleCommands(role: Role){
     switch(role){
         case Role.ADMIN:
             res.push("## Admin");
-            res.push("- /addRole --userID USERID --role ROLE $ Assigns the given user the specified role");
-            res.push("- /removeRole --userID USERID --role ROLE $ Removes role from the given user");
-            res.push("- /addAllAccounts $ Adds every account in the server to the database");
-            res.push("- /allAccounts $ Lists off every account with their elo that's in the database");
-            res.push("- /wipeDB $ Wipes all the data from the database");
-            res.push("- /resetAllElo $ Resets the elo of everyone on the server back to 1000");
+            res.push("- /addrole --userID USERID --role ROLE $ Assigns the given user the specified role");
+            res.push("- /removerole --userID USERID --role ROLE $ Removes role from the given user");
+            res.push("- /addallaccounts $ Adds every account in the server to the database");
+            res.push("- /allaccounts $ Lists off every account with their elo that's in the database");
+            res.push("- /wipedb $ Wipes all the data from the database");
+            res.push("- /resetallelo $ Resets the elo of everyone on the server back to 1000");
             break;
         case Role.ORGANIZER: 
             res.push("## Organizer");
-            res.push('- /syncContestElo --site SITE_NAME --code CONTEST_CODE $ Syncs the contest to the database and updates the elo for each participant');
-            res.push('- /syncGymElo $ Requires you to upload the html of the gym standings as an attachment')
-            res.push("- /updateEloTags $ Updates the elo tag in each users nickname");
-            res.push("- /previouslySynced $ Lists all the previously synced competitions");
+            res.push('- /synccontestelo --site SITE_NAME --code CONTEST_CODE $ Syncs the contest to the database and updates the elo for each participant');
+            res.push('- /syncgymelo $ Requires you to upload the html of the gym standings as an attachment')
+            res.push("- /updateelotags $ Updates the elo tag in each users nickname");
+            res.push("- /previouslysynced $ Lists all the previously synced competitions");
             break;
         case Role.USER: 
             res.push("## User");
             res.push("- /help $ Returns a list of commands");
             res.push("- /elo --userID USERID $ Returns the amount of elo the given user has");
-            res.push("- /eloHistory $ Returns your complete elo history");
-            res.push("- /toggleShowELO $ Will toggle if your nickname has your ELO included");
-            res.push("- /addAccount $ Will add your account to the database");
-            res.push("- /setSiteUsername --user SITES_USERNAME --site ['kattis', 'codeforces'] $ Sets your username for the specified site, important for updating elo after a competition");
+            res.push("- /elohistory $ Returns your complete elo history");
+            res.push("- /toggleshowelo $ Will toggle if your nickname has your ELO included");
+            res.push("- /addaccount $ Will add your account to the database");
+            res.push("- /setsiteusername --user SITES_USERNAME --site ['kattis', 'codeforces'] $ Sets your username for the specified site, important for updating elo after a competition");
             break;
     }
 

@@ -28,4 +28,12 @@ export default class AllAccountsCommandHandler extends SlashCommandHandler{
 
         return res.join('\n');
     }
+    
+    public getDescription(): string{
+        return "Lists off every account with their elo that's in the database";
+    }
+
+    public getName(): string{
+       return "allaccounts"; 
+    }
 }

@@ -1,8 +1,9 @@
-import { Client, GatewayIntentBits, messageLink } from "discord.js";
+import { CacheType, Client, Events, GatewayIntentBits, GuildMember, Interaction, REST, RoleSelectMenuInteraction, Routes } from "discord.js";
 import { config } from "./config";
 import CommandHandler from "./commands/CommandHandler";
+
 import { RoleError } from "./lib/Role";
-import { commandFactory} from "./commands";
+import { commandFactory, loadCommands } from "./commands";
 
 function isClubBot(displayName: string): boolean{
   return displayName == "CodeClub";
@@ -21,8 +22,42 @@ const client = new Client({
   ],
 });
 
-client.once("ready", () => {
+client.once("ready", async () => {
   console.log("Discord bot is ready! 🤖");
+
+  // Now iterate over command definition
+  const rest = new REST({ version: "10" }).setToken(config.DISCORD_TOKEN);
+  const commands = await loadCommands();
+  try{
+    await rest.put(Routes.applicationCommands(config.DISCORD_CLIENT_ID),
+      {body: commands}
+    );
+    console.log("Slash commands registered ✅");
+  }catch(err: any){
+    console.error("Failed to register slash commands: ", err);
+  }
+});
+
+client.on(Events.InteractionCreate, async (interaction: Interaction<CacheType>) => {
+  if (!interaction.isChatInputCommand()) return;
+
+  const { commandName, options, user, member } = interaction;
+  if (isClubBot(user.displayName)) return;
+
+
+  let args: any[] = [];
+  for (const data of options.data){
+    if (data.attachment == null){
+      args.push(`--${data.name}`);
+      args.push(data.value);
+    }else{
+      args.push(data.attachment?.url); // Add the url of any attatchments
+    }
+  }
+
+  const commandHandler: CommandHandler = commandFactory(user, member as GuildMember, commandName, args);
+  const res: any | undefined | null = await commandHandler.handle();
+  if (res) interaction.reply(res);
 });
 
 client.on('guildMemberAdd', async member =>{

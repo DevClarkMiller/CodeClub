@@ -1,5 +1,5 @@
 import SlashCommandHandler from "@commands/SlashCommandHandler";
-import { Guild, GuildMember, User } from "discord.js";
+import { Guild, GuildMember, SlashCommandBuilder, User } from "discord.js";
 import Role from "@lib/Role";
 import { Account } from "@generated/prisma";
 import AccountDao from "@dao/accountDao";
@@ -38,4 +38,18 @@ export default class ResetAllEloCommandHandler extends SlashCommandHandler{
             return "Couldn't reset all elo, please try again";
         }
     }
+
+    public getDescription(): string{
+        return "Resets the elo of everyone on the server back to 1000";
+    }
+
+    public getName(): string{
+       return "resetallelo"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("resetallelo")
+    .setDescription("Resets the elo of everyone on the server back to 1000")
+];

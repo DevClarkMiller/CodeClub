@@ -2,6 +2,7 @@ import { Account, AccountElo } from "@generated/prisma";
 import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler";
 import AccountEloDao from "@dao/accountEloDao";
+import { SlashCommandBuilder } from "discord.js";
 
 export default class EloHistoryCommandHandler extends SlashCommandHandler{
     public async handle(): Promise<any> {
@@ -24,4 +25,18 @@ export default class EloHistoryCommandHandler extends SlashCommandHandler{
             return "Couldn't get your elo history, please try again";
         }
     }
+
+    public getDescription(): string{
+        return "Returns your complete elo history";
+    }
+
+    public getName(): string{
+       return "elohistory"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("elohistory")
+    .setDescription("Returns your complete elo history")
+];

@@ -1,6 +1,7 @@
 import { Account } from "@generated/prisma";
 import AccountDao from "@dao/accountDao";
 import SlashCommandHandler from "@commands/SlashCommandHandler";
+import { SlashCommandBuilder } from "discord.js";
 
 export default class ToggleShowELOCommandHandler extends SlashCommandHandler{
     async handle(): Promise<any> {
@@ -21,4 +22,18 @@ export default class ToggleShowELOCommandHandler extends SlashCommandHandler{
             return "";
         }
     }
+
+    public getDescription(): string{
+        return "Will toggle if your nickname has your ELO included";
+    }
+
+    public getName(): string{
+       return "toggleshowelo"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("toggleshowelo")
+    .setDescription("Will toggle if your nickname has your ELO included")
+];

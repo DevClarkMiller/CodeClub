@@ -1,5 +1,5 @@
 import SlashCommandHandler from "@commands/SlashCommandHandler";
-import { User, GuildMember } from "discord.js";
+import { User, GuildMember, SlashCommandBuilder } from "discord.js";
 import Role from "@lib/Role";
 import AccountDao from "@dao/accountDao";
 import AccountEloDao from "@dao/accountEloDao";
@@ -29,4 +29,18 @@ export default class WipeDBCommandHandler extends SlashCommandHandler{
             return "Something went wrong while wiping the database";
         }
     }
+    
+    public getDescription(): string{
+        return "Wipes all the data from the database";
+    }
+
+    public getName(): string{
+       return "wipedb"; 
+    }
 }
+
+export const cmdDefs: any[] = [
+    new SlashCommandBuilder()
+    .setName("wipedb")
+    .setDescription("Wipes all the data from the database")
+];
